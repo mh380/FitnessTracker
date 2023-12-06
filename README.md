@@ -1,6 +1,6 @@
 # TrackMaster
 
-```
+
 ## Group members:
 
 Lara Blersch (lb210)
