@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 
+// test karin
+
 class MainActivity : AppCompatActivity() {
 
     private var counter = 0     //var -> mehrfache Wertzuweisung möglich; val -> nur eine Wertzuweisung/ Konstante
