@@ -7,6 +7,9 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [Track::class], version = 1, exportSchema = false) //bei Änderungen immer Versionsnummer erhöhen!
 abstract class TrackDatabase : RoomDatabase() {
+
+    abstract fun trackDao(): TrackDao
+
     companion object {
         @Volatile
         private var INSTANCE: TrackDatabase? = null
@@ -16,7 +19,7 @@ abstract class TrackDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     TrackDatabase::class.java,
-                    "movie-database").build()
+                    "track-database").build()
                 INSTANCE = instance
                 instance
             }
