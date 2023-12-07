@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">MovieTracker</string>
-    <string name="button">Button</string>
-    <string name="resultsTextView">clicks: 5</string>
+    <string name="app_name">TrackMaster</string>
     <string name="welcome_back">Welcome Back!</string>
 </resources>
