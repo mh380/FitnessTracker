@@ -11,4 +11,5 @@ data class Track (
     @ColumnInfo(name = "distance") val distance: Int,
     @ColumnInfo(name = "time") val time: Int,
     @ColumnInfo(name = "pace") val pace: Int,
+    //todo: Change variable type according to the type from googlemaps?
 )
