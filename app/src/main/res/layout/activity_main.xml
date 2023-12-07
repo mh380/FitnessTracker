@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/SCREEN"
-    tools:context=".MainActivity">
+    tools:context=".homeScreen.MainActivity">
 
     <TextView
         android:id="@+id/welcomeTextView"
@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/welcome_back"
-        style="@style/TEXT"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        style="@style/FABUTTON"
         android:clickable="true"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
