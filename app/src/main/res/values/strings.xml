@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TrackMaster</string>
     <string name="welcome_back">Welcome Back!</string>
+
+<!--    adding API Key-->
+    <string name="my_map_api_key">AIzaSyBprO5DNuZS59LfFq6Kr2LMmsEt4GSSaBo</string>
+    
 </resources>

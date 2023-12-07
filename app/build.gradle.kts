@@ -53,4 +53,7 @@ dependencies {
     implementation("com.google.maps.android:android-maps-utils:2.2.3")
     implementation("com.google.maps.android:maps-utils-ktx:3.2.0")
     ksp("androidx.room:room-compiler:2.5.2")
+
+//    adding google android dependency
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
 }
