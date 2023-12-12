@@ -1,12 +1,13 @@
 <resources>
+
+    <!--    adding API Key-->
+    <string name="my_map_api_key">AIzaSyBprO5DNuZS59LfFq6Kr2LMmsEt4GSSaBo</string>
+
     <string name="app_name">TrackMaster</string>
     <string name="welcome_back">Welcome Back!</string>
-    <string name="turn_to_dark_mode">Turn to dark mode</string>
-    <string name="turn_to_light_mode">Turn to light mode</string>
-
-<!--    adding API Key-->
-    <string name="my_map_api_key">AIzaSyBprO5DNuZS59LfFq6Kr2LMmsEt4GSSaBo</string>
     <string name="settings">Settings</string>
     <string name="startnewactivity">startNewActivity</string>
+    <string name="dark_mode_enabled">Dark Mode enabled</string>
+    <string name="dark_mode_disabled">Dark Mode disabled</string>
 
 </resources>

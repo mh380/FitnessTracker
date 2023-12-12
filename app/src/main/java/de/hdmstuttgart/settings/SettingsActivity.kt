@@ -25,7 +25,11 @@ class SettingsActivity : AppCompatActivity() {
 
         darkLightSwitch.setOnCheckedChangeListener { _, isChecked ->
             // Theme basierend auf dem Switch-Status ändern
-            setTheme(if (isChecked) R.style.Base_Theme_TrackMaster else R.style.Theme_TrackMaster)
+            setTheme(if (isChecked) {
+                R.style.Base_Theme_TrackMaster
+            } else {
+                R.style.Theme_TrackMaster
+            })
 
             // Aktivität aktualisieren, um die Änderungen anzuwenden
             recreate()
