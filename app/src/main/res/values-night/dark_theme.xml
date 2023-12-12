@@ -37,6 +37,7 @@
 
     <!-- todo: Map color change? -->
 
-
+    <!-- todo: rewrite file to be one style/ theme not many or use the defined styles within a theme -->
+    <!-- todo: define the styles on the layout elements to be used for styling -->
 
 </resources>

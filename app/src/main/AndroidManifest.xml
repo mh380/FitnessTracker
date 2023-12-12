@@ -12,9 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrackMaster"
         tools:targetApi="31">
-        <activity
-            android:name=".newActivityScreen.NewActivity"
-            android:exported="false" />
+
         <activity
             android:name=".homeScreen.MainActivity"
             android:exported="true">
@@ -24,6 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".newActivityScreen.NewActivity"
+            android:exported="false" />
+        <activity
+            android:name="de.hdmstuttgart.settings.SettingsActivity"
+            android:exported="false" />
+
 
 <!--        //adding Meta-Data-->
         <meta-data

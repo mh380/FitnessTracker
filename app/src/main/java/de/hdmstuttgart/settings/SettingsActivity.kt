@@ -1,5 +1,6 @@
 package de.hdmstuttgart.settings
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -9,15 +10,28 @@ import de.hdmstuttgart.trackmaster.R
 
 class SettingsActivity : AppCompatActivity() {
 
-    fun onCreate(view: View, savedInstanceState: Bundle?) {
+    private lateinit var sharedPreferences: SharedPreferences
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        // todo: toggle between light and dark mode, not working yet
-        val darkLightSwitch = view.findViewById<SwitchMaterial>(R.id.darkLightSwitch)
+        val darkLightSwitch = this.findViewById<SwitchMaterial>(R.id.darkLightSwitch)
 
-        darkLightSwitch.isChecked = true
+        sharedPreferences = getPreferences(MODE_PRIVATE)
 
+        // Status des SwitchMaterial aus den SharedPreferences wiederherstellen
+        darkLightSwitch.isChecked = sharedPreferences.getBoolean("darkTheme", false)
 
+        darkLightSwitch.setOnCheckedChangeListener { _, isChecked ->
+            // Theme basierend auf dem Switch-Status ändern
+            setTheme(if (isChecked) R.style.Base_Theme_TrackMaster else R.style.Theme_TrackMaster)
+
+            // Aktivität aktualisieren, um die Änderungen anzuwenden
+            recreate()
+
+            // Status des SwitchMaterial in den SharedPreferences speichern
+            sharedPreferences.edit().putBoolean("darkTheme", isChecked).apply()
+        }
     }
 }

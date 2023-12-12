@@ -10,6 +10,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import de.hdmstuttgart.settings.SettingsActivity
 import de.hdmstuttgart.trackmaster.newActivityScreen.NewActivity
 import de.hdmstuttgart.trackmaster.R
 
@@ -27,6 +28,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun onFloatingActionButtonClick(view: View) {
         val intent = Intent(this, NewActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun onSettingsButtonClick (view: View) {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onMapReady(p0: GoogleMap) {
