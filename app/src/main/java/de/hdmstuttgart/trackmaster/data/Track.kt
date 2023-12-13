@@ -3,11 +3,12 @@ package de.hdmstuttgart.trackmaster.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.time.LocalDate
 
 @Entity
 data class Track (
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name = "date") val date: String,
+    @ColumnInfo(name = "date") val date: LocalDate = LocalDate.now(),
     @ColumnInfo(name = "distance") val distance: Int,
     @ColumnInfo(name = "time") val time: Int,
     @ColumnInfo(name = "pace") val pace: Int,

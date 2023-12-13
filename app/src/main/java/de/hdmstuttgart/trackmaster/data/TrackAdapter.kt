@@ -21,7 +21,7 @@ class TrackAdapter(private val list: List<Track>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val trackModel = list[position]
-        holder.dateView.text = trackModel.date
+        holder.dateView.text = trackModel.date.toString() //todo: migth change that
         holder.distanceView.text = trackModel.distance.toString()
         holder.timeView.text = trackModel.time.toString()
         holder.paceView.text = trackModel.pace.toString()
