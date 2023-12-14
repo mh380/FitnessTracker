@@ -14,7 +14,7 @@ class TrackRepository(private val trackDao: TrackDao) {
         return trackDao.getAllTracks()
     }
 
-    fun getTracksFromWeek(date: LocalDate): List<Track> {
+    /*fun getTracksFromWeek(date: LocalDate): List<Track> {
         // Get the start date of the current week (Monday)
         val startDate = date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
 
@@ -39,7 +39,7 @@ class TrackRepository(private val trackDao: TrackDao) {
         //targetYear has to be a four-digit-string
         val targetYear = year.toString()
         return trackDao.getTracksFromYear(targetYear)
-    }
+    }*/
 
     @WorkerThread
     suspend fun insert(track: Track) {

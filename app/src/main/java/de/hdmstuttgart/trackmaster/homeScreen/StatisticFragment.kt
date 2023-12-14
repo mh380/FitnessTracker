@@ -1,5 +1,7 @@
 package de.hdmstuttgart.trackmaster.homeScreen
 
+import android.os.Bundle
+import android.view.View
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,7 +28,14 @@ import de.hdmstuttgart.trackmaster.data.BarchartInput
 
 class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
-    @Composable
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // some test tracks //todo: remove later
+
+    }
+
+    /*@Composable
     fun BarChart(
         inputList: List<BarchartInput>,
         modifier: Modifier = Modifier,
@@ -115,5 +124,5 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 }
             }
         }
-    }
+    }*/
 }
