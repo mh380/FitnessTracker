@@ -6,6 +6,7 @@ import java.time.LocalDate
 class Converters {
     @TypeConverter
     fun fromLocalDate(date: LocalDate?): String? {
+        //date is converted to a string in the format: yyyy-MM-dd
         return date?.toString()
     }
 

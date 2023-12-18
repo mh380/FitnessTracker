@@ -22,7 +22,7 @@ class TrackRepository(private val trackDao: TrackDao) {
         val endDate = date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY))
 
         return trackDao.getTracksFromWeek(startDate, endDate)
-    }
+    }*/
 
     fun getTracksFromMonth(month: Month): List<Track> {
         //targetMonth has to be a two-digit-string
@@ -39,7 +39,7 @@ class TrackRepository(private val trackDao: TrackDao) {
         //targetYear has to be a four-digit-string
         val targetYear = year.toString()
         return trackDao.getTracksFromYear(targetYear)
-    }*/
+    }
 
     @WorkerThread
     suspend fun insert(track: Track) {

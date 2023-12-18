@@ -8,23 +8,23 @@
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/date" />
 
     <TextView
         android:id="@+id/distance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/distance" />
 
     <TextView
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/time" />
 
     <TextView
         android:id="@+id/pace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/average_pace" />
 </LinearLayout>

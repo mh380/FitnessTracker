@@ -11,6 +11,6 @@ data class Track (
     @ColumnInfo(name = "date") val date: LocalDate = LocalDate.now(),
     @ColumnInfo(name = "distance") val distance: Int,
     @ColumnInfo(name = "time") val time: Int,
-    @ColumnInfo(name = "pace") val pace: Int,
+    @ColumnInfo(name = "pace") val pace: Float = distance/time.toFloat(),
     //todo: Change variable type according to the type from googlemaps?
 )

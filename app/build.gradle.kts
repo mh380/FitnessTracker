@@ -50,7 +50,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("com.google.maps.android:android-maps-utils:2.2.3")
     implementation("com.google.maps.android:maps-utils-ktx:3.2.0")
-    implementation ("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 
     //room dependencies
     ksp("androidx.room:room-compiler:2.6.1")
@@ -59,7 +59,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     //canvas dependencies
-    implementation ("androidx.compose.ui:ui:1.5.4")
-    implementation ("androidx.compose.ui:ui-tooling-preview:1.5.4")
-    implementation ("androidx.compose.material:material:1.5.4")
+    implementation("androidx.compose.ui:ui:1.5.4")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
+    implementation("androidx.compose.material:material:1.5.4")
 }

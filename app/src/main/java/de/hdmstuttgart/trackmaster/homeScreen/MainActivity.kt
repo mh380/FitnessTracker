@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import de.hdmstuttgart.settings.SettingsActivity
 import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.newActivityScreen.NewActivity
+import de.hdmstuttgart.trackmaster.trackScreen.TrackActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +23,11 @@ class MainActivity : AppCompatActivity() {
 
     fun onSettingsButtonClick (view: View) {
         val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun onTrackButtonClick (view: View) {
+        val intent = Intent(this, TrackActivity::class.java)
         startActivity(intent)
     }
 }

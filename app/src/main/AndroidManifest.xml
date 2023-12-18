@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -32,8 +34,12 @@
             android:name=".newActivityScreen.NewActivity"
             android:exported="false" />
         <activity
+            android:name=".trackScreen.TrackActivity"
+            android:exported="false" />
+        <activity
             android:name="de.hdmstuttgart.settings.SettingsActivity"
             android:exported="false" />
+
 
 
 <!--        //adding Meta-Data-->

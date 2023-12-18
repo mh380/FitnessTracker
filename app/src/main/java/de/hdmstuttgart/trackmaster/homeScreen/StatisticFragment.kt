@@ -1,6 +1,7 @@
 package de.hdmstuttgart.trackmaster.homeScreen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
@@ -22,18 +23,26 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import de.hdmstuttgart.trackmaster.R
+import de.hdmstuttgart.trackmaster.TrackMasterApplication
+import de.hdmstuttgart.trackmaster.data.TrackRepository
 import de.hdmstuttgart.trackmaster.data.BarchartInput
+import de.hdmstuttgart.trackmaster.data.Track
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.time.LocalDate
 
 
 class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // some test tracks //todo: remove later
-
     }
+
 
     /*@Composable
     fun BarChart(

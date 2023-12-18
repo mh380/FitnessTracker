@@ -8,5 +8,9 @@
     <string name="startnewactivity">startNewActivity</string>
     <string name="dark_mode_enabled">Dark Mode enabled</string>
     <string name="dark_mode_disabled">Dark Mode disabled</string>
+    <string name="date">Date:</string>
+    <string name="distance">Distance:</string>
+    <string name="time">Time:</string>
+    <string name="average_pace">Average pace:</string>
 
 </resources>
