@@ -5,6 +5,6 @@ import de.hdmstuttgart.trackmaster.data.TrackDatabase
 import de.hdmstuttgart.trackmaster.data.TrackRepository
 
 class TrackMasterApplication : Application() {
-    val database by lazy { TrackDatabase.getDatabase(this) }
+    private val database by lazy { TrackDatabase.getDatabase(this) }
     val repository by lazy { TrackRepository(database.trackDao()) }
 }

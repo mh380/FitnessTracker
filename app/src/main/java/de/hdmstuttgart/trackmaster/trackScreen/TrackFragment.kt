@@ -28,22 +28,9 @@ class TrackFragment : Fragment(R.layout.fragment_tracks), TrackClickListener {
 
         recyclerView.adapter = adapter
 
-        activity?.let {
-            val fragmentActivity = it
-            val trackMasterApplication = fragmentActivity.application as TrackMasterApplication
+        update()
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                data.clear()
-                data.addAll(trackMasterApplication.repository.getAllTracks())
-
-                withContext(Dispatchers.Main) {
-                    adapter.notifyDataSetChanged()
-                }
-            }
-        }
-
-/*
-        lifecycleScope.launch(Dispatchers.IO) { //im Hintergrund
+        /*lifecycleScope.launch(Dispatchers.IO) {
 
             val fragmentActivity = requireActivity() as TrackActivity
             val trackMasterApplication = fragmentActivity.application as TrackMasterApplication
@@ -52,7 +39,7 @@ class TrackFragment : Fragment(R.layout.fragment_tracks), TrackClickListener {
             trackMasterApplication.repository.insert(Track(distance = 2, time = 20))
             trackMasterApplication.repository.insert(Track(distance = 5, time = 45))
 
-            withContext(Dispatchers.Main) {//im Vordergrund
+            withContext(Dispatchers.Main) {
                 data.clear()
                 data.addAll(trackMasterApplication.repository.getAllTracks())
                 adapter.notifyDataSetChanged()
@@ -60,6 +47,25 @@ class TrackFragment : Fragment(R.layout.fragment_tracks), TrackClickListener {
         }*/
     }
 
+    private fun update() {
+        activity?.let {
+            val fragmentActivity = it
+            val trackMasterApplication = fragmentActivity.application as TrackMasterApplication
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                //todo: remove test tracks //todo: inserting a track into the database has to happen whenever tracking is stopped
+                //trackMasterApplication.repository.insert(Track(distance = 2, time = 20))
+                //trackMasterApplication.repository.insert(Track(distance = 5, time = 45))
+
+                data.clear()
+                data.addAll(trackMasterApplication.repository.getAllTracks())
+
+                withContext(Dispatchers.Main) {
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
+    }
 
 
     override fun onTrackClickListener(position: Int) {
@@ -68,9 +74,9 @@ class TrackFragment : Fragment(R.layout.fragment_tracks), TrackClickListener {
         //todo: show track details? delete track? if neither is wanted delete onTrackClickListener
         activity?.let {
 
-            lifecycleScope.launch(Dispatchers.IO) { //im Hintergrund
+            lifecycleScope.launch(Dispatchers.IO) {
 
-                withContext(Dispatchers.Main) {//im Vordergrund
+                withContext(Dispatchers.Main) {
 
                 }
             }
