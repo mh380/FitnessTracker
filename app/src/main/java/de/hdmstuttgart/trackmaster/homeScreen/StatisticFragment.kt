@@ -38,16 +38,14 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
     private val defaultMaxHeight = 200.dp
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     /*override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return ComposeView(requireContext()).apply {
-            setContent {
+        return inflater.inflate(R.layout.fragment_statistic, container, false).apply {
+            findViewById<ComposeView>(R.id.composeView).setContent {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Color(R.color.white)
@@ -56,9 +54,9 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 }
             }
         }
-    }*/
+    }
 
-   /* private fun getInput(): List<BarchartInput> {
+   private fun getInput(): List<BarchartInput> {
         var barchartInputList: MutableList<BarchartInput> = mutableListOf()
 
         activity?.let {
@@ -74,9 +72,9 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
             }
         }
         return barchartInputList
-    }*/
+    }
 
-    /*@Composable
+    @Composable
     fun BarChart(
         inputList: List<BarchartInput>,
         modifier: Modifier = Modifier,
@@ -118,13 +116,13 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                     input = item,
                     color = Color(0xFF03DAC5), //todo: change color (add it to colors.xml and reference it here)
                     maxHeight = maxHeight,
-                    description = item.date.toString()
+                    description = item.date
                 )
             }
         }
-    }*/
+    }
 
-    /*@Composable
+    @Composable
     fun RowScope.Bar(
         input: BarchartInput,
         color: Color,
