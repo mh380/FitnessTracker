@@ -8,6 +8,7 @@ import androidx.room.Query
 @Dao
 interface TrackDao {
     //dao = database access object
+
     @Query("SELECT * FROM track")
     fun getAllTracks(): List<Track>
 
@@ -25,4 +26,7 @@ interface TrackDao {
 
     @Delete
     suspend fun delete(track: Track)
+
+    @Query("DELETE FROM track")
+    suspend fun deleteAll()
 }

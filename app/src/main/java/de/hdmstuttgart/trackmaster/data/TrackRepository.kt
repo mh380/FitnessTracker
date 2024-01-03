@@ -3,12 +3,9 @@ package de.hdmstuttgart.trackmaster.data
 import androidx.annotation.WorkerThread
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.Month
-import java.time.Year
 import java.time.temporal.TemporalAdjusters
 
 class TrackRepository(private val trackDao: TrackDao) {
-
 
     fun getAllTracks(): List<Track> {
         return trackDao.getAllTracks()
@@ -26,18 +23,13 @@ class TrackRepository(private val trackDao: TrackDao) {
 
     fun getTracksFromMonth(month: Month): List<Track> {
         //targetMonth has to be a two-digit-string
-        var targetMonth: String
-        if(month.value < 10) {
-            targetMonth = "0" + month.value
-        } else {
-            targetMonth = month.value.toString()
-        }
+        var targetMonth= month.number
         return trackDao.getTracksFromMonth(targetMonth)
     }
 
-    fun getTracksFromYear(year: Year): List<Track> {
+    fun getTracksFromYear(year: String): List<Track> {
         //targetYear has to be a four-digit-string
-        val targetYear = year.toString()
+        val targetYear = year
         return trackDao.getTracksFromYear(targetYear)
     }
 
@@ -49,5 +41,10 @@ class TrackRepository(private val trackDao: TrackDao) {
     @WorkerThread
     suspend fun delete(track: Track) {
         trackDao.delete(track)
+    }
+
+    @WorkerThread
+    suspend fun deleteAll() {
+        trackDao.deleteAll()
     }
 }

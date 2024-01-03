@@ -29,22 +29,6 @@ class TrackFragment : Fragment(R.layout.fragment_tracks), TrackClickListener {
         recyclerView.adapter = adapter
 
         update()
-
-        /*lifecycleScope.launch(Dispatchers.IO) {
-
-            val fragmentActivity = requireActivity() as TrackActivity
-            val trackMasterApplication = fragmentActivity.application as TrackMasterApplication
-
-            //todo: remove test tracks //todo: inserting a track into the database has to happen whenever tracking is stopped
-            trackMasterApplication.repository.insert(Track(distance = 2, time = 20))
-            trackMasterApplication.repository.insert(Track(distance = 5, time = 45))
-
-            withContext(Dispatchers.Main) {
-                data.clear()
-                data.addAll(trackMasterApplication.repository.getAllTracks())
-                adapter.notifyDataSetChanged()
-            }
-        }*/
     }
 
     private fun update() {
@@ -54,8 +38,9 @@ class TrackFragment : Fragment(R.layout.fragment_tracks), TrackClickListener {
 
             lifecycleScope.launch(Dispatchers.IO) {
                 //todo: remove test tracks //todo: inserting a track into the database has to happen whenever tracking is stopped
-                //trackMasterApplication.repository.insert(Track(distance = 2, time = 20))
-                //trackMasterApplication.repository.insert(Track(distance = 5, time = 45))
+                trackMasterApplication.repository.deleteAll()
+                trackMasterApplication.repository.insert(Track(distance = 2, time = 20))
+                trackMasterApplication.repository.insert(Track(distance = 5, time = 45))
 
                 data.clear()
                 data.addAll(trackMasterApplication.repository.getAllTracks())
