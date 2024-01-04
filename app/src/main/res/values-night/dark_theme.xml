@@ -11,6 +11,12 @@
         <item name="android:background">#373737</item>
     </style>
 
+    <!-- Nav bar design  -->
+    <style name="NavBar" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background"></item>
+
+    </style>
+
     <!-- Text color, default white  -->
 
     <!-- todo: Highlighted text needs to change -->

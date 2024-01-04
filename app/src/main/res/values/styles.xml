@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- todo: define the styles here and use those to define the themes?-->
+    <!-- todo: styles define the look of a single view, themes for the entire app. implement the modes in themes!-->
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue_secondary</item>
+        <item name="colorOnPrimary">@color/almost_black</item>
+
+
+
+    </style>
+
+
+
+
+
+
 </resources>

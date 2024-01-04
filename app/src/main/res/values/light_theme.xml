@@ -8,25 +8,77 @@
     <style name="Theme.TrackMaster" parent="Base.Theme.TrackMaster" />
 
     <!-- Light mode  -->
-    <!-- Screen background color, default white -->
     <style name="SCREEN">
-        <item name="android:background">#FFF</item>
+        <item name="android:background">@color/L_background_white</item>
+        <item name="android:textColor">@color/L_text_black</item>
     </style>
 
-    <!-- Text color, default black  -->
+    <!-- bottom Nav Bar design  -->
+    <style name="NavBar" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/L_medium_blue</item>
+        <item name="android:textColor">@color/L_background_white</item>
+        <item name="android:activatedBackgroundIndicator">@color/L_sky_blue</item>
+        <!-- the 3 Icons may need to be modified here -->
+    </style>
 
-    <!-- todo: Highlighted text needs to change -->
+    <!-- Floating Action button style -->
+    <style name="FAButton" parent="ShapeAppearanceOverlay.Material3.FloatingActionButton">
+        <item name="android:background">@color/L_medium_blue</item>
+        <item name="android:textColor">@color/L_background_white</item>
+        <item name="android:colorControlActivated">@color/L_sky_blue</item>
+        <!-- drop shadow -->
+    </style>
 
-    <!-- Button color, default blue-->
+    <!-- Statistic cards -->
+    <!-- Card view containing image view and text view -->
+    <style name="StatCards" parent="Widget.Material3.CardView.Elevated">
+        <item name="android:background">@color/L_background_white</item>
+        <item name="android:textColor">@color/L_text_black</item>
+    </style>
 
-    <!-- todo: second button color maybe? -->
+    <!-- todo: Statistics colors
+    <style name="" patent="">
+        <item name="android:textcolor">@color/L_background_white</item>
+        <item name=" underline ">@color/L_dark_blue</item>
+        <item name=" bar color">@color/L_medium_blue</item>
+    </style>
+    -->
 
-    <!-- Floating action Button, default blue, like button-->
+    <!-- Play/Pause Button -->
+    <style name="PlayPauseButton" parent="Widget.Material3.MaterialTimePicker.ImageButton">
+        <item name="android:background">@color/L_medium_blue</item>
+        <item name="android:colorControlActivated">@color/L_sky_blue</item>
+    </style>
+
+    <!-- end session button  -->
+    <style name="EndSessionButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:background">@color/L_background_white</item>
+        <item name="android:color">@color/L_medium_blue</item>
+        <item name="android:textColor">@color/L_medium_blue</item>
+        <item name="android:colorControlActivated">@color/L_sky_blue</item>
+    </style>
+
+    <!-- Headding trackmaster text -->
 
 
-    <!-- todo: Statistics colors need to change as well  -->
+    <!-- track view -->
+    <style name="trackView" parent="Widget.Material3.CardView.Filled">
+        <item name="android:background">@color/L_light_blue</item>
+        <item name="android:textColor">@color/L_background_white</item>
+        <!-- todo: dark blue highlighted headline text color
+         <item name="">@color/L_dark_blue</item>
+         -->
+    </style>
 
-    <!-- todo: Map color change? -->
+    <!-- settings toggle -->
+    <style name="settingsToggle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="android:background">@color/L_light_blue</item>
+        <item name="android:colorAccent">@color/L_powder_blue</item>
+    </style>
+
+
+
+    <!-- todo: Map color change? dark mode may be exclusive to google maps -->
 
 
 </resources>
