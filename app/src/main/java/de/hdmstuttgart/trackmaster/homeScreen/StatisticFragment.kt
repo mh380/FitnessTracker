@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,6 +25,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
@@ -30,25 +33,30 @@ import androidx.lifecycle.lifecycleScope
 import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.TrackMasterApplication
 import de.hdmstuttgart.trackmaster.data.BarchartInput
+import de.hdmstuttgart.trackmaster.data.Track
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
-    private val defaultMaxHeight = 200.dp
+    private val defaultMaxHeight = 100.dp
 
 
-    /*override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_statistic, container, false).apply {
+            ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
+
             findViewById<ComposeView>(R.id.composeView).setContent {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color(R.color.white)
+                    color = Color.LightGray
                 ) {
                     BarChart(getInput())
                 }
@@ -57,13 +65,20 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     }
 
    private fun getInput(): List<BarchartInput> {
-        var barchartInputList: MutableList<BarchartInput> = mutableListOf()
+        val barchartInputList: MutableList<BarchartInput> = mutableListOf()
 
         activity?.let {
             val fragmentActivity = it
             val trackMasterApplication = fragmentActivity.application as TrackMasterApplication
 
             lifecycleScope.launch(Dispatchers.IO) {
+
+
+                //todo: remove test tracks
+                trackMasterApplication.repository.deleteAll()
+                trackMasterApplication.repository.insert(Track(distance = 2, time = 20))
+                trackMasterApplication.repository.insert(Track(distance = 5, time = 45))
+
                 val allTracks = trackMasterApplication.repository.getAllTracks()
                 for(track in allTracks) {
                     val input = BarchartInput(track.distance, track.date.toString())
@@ -71,8 +86,9 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 }
             }
         }
-        return barchartInputList
+       return barchartInputList
     }
+
 
     @Composable
     fun BarChart(
@@ -80,7 +96,9 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         modifier: Modifier = Modifier,
         maxHeight: Dp = defaultMaxHeight
     ) {
-        assert(inputList.isNotEmpty()) { "No data, start tracking your activities." }
+        if(inputList.isNotEmpty()) {
+            Text(text =  "No data, start tracking your activities.")
+        }
 
         val borderColor = Color(R.color.black)
         val density = LocalDensity.current
@@ -129,7 +147,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         maxHeight: Dp,
         description: String
     ) {
-        val value = input.value
+        val value = input.distance
         val itemHeight = remember(value) { value * maxHeight.value / 100 }
 
         Spacer(
@@ -139,7 +157,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 .weight(1f)
                 .background(color)
         )
-    }*/
+    }
 
 
 

@@ -1,8 +1,6 @@
 package de.hdmstuttgart.trackmaster.data
 
-import androidx.compose.ui.graphics.Color
-
 data class BarchartInput(
-    val value: Int,
+    val distance: Int,
     val date: String,
 )
