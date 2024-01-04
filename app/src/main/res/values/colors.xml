@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+
+    // light mode colors marked with L
+    <color name="L_background_white">#FAFAFA</color>
+    <color name="L_text_black">#505050</color>
+    <color name="L_powder_blue">#BCDEFB</color>
+    <color name="L_sky_blue">#62B6F7</color>
+    <color name="L_light_blue">#91CBF9</color>
+    <color name="L_medium_blue">#1B76D2</color>
+    <color name="L_dark_blue">#0B47A1</color>
+    <color name="L_text_on_blue">#FFFFFF</color>
+
+    // dark mode colors marked with R
+
+    <color name="D_text_white">#DEEDF8</color>
+
+
+
+
+
+
 </resources>
