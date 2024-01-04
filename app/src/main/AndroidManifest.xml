@@ -2,12 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    Adding permission for current google maps location-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Adding permission for current google maps location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".TrackMasterApplication"
@@ -20,6 +18,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrackMaster"
         tools:targetApi="31">
+
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_API_KEY" />
 
         <activity
             android:name=".homeScreen.MainActivity"
@@ -39,14 +52,6 @@
         <activity
             android:name="de.hdmstuttgart.settings.SettingsActivity"
             android:exported="false" />
-
-
-
-<!--        //adding Meta-Data-->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/my_map_api_key" />
-
     </application>
 
 </manifest>
