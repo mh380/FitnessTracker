@@ -7,19 +7,19 @@
     <color name="L_background_white">#FAFAFA</color>
     <color name="L_text_black">#505050</color>
     <color name="L_powder_blue">#BCDEFB</color>
-    <color name="L_sky_blue">#62B6F7</color>
     <color name="L_light_blue">#91CBF9</color>
-    <color name="L_medium_blue">#1B76D2</color>
-    <color name="L_dark_blue">#0B47A1</color>
     <color name="L_text_on_blue">#FFFFFF</color>
 
     // dark mode colors marked with R
-
     <color name="D_text_white">#DEEDF8</color>
+    <color name="D_background_black">#1D1B20</color>
+    <color name="D_secondary_black">#303B4C</color>
+    <color name="D_secondary_blue">#2a4671</color>
 
-
-
-
+    // colors that both use
+    <color name="dark_blue">#0B47A1</color>
+    <color name="medium_blue">#1B76D2</color>
+    <color name="sky_blue">#62B6F7</color>
 
 
 </resources>
