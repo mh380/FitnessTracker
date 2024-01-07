@@ -10,7 +10,7 @@
     <color name="L_light_blue">#91CBF9</color>
     <color name="L_text_on_blue">#FFFFFF</color>
 
-    // dark mode colors marked with R
+    // dark mode colors marked with D
     <color name="D_text_white">#DEEDF8</color>
     <color name="D_background_black">#1D1B20</color>
     <color name="D_secondary_black">#303B4C</color>
