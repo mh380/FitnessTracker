@@ -5,9 +5,7 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryVariant">@color/blue_secondary</item>
-        <item name="colorOnPrimary">@color/almost_black</item>
+
 
 
 
