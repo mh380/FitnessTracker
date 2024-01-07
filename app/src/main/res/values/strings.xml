@@ -12,5 +12,7 @@
     <string name="distance">Distance:</string>
     <string name="time">Time:</string>
     <string name="average_pace">Average pace:</string>
+    <string name="home">Home</string>
+    <string name="tracks">Tracks</string>
 
 </resources>
