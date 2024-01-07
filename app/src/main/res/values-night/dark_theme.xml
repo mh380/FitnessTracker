@@ -9,6 +9,7 @@
     <style name="SCREEN">
         <item name="android:background">@color/D_background_black</item>
         <item name="android:textColor">@color/D_text_white</item>
+        <item name="android:textSize">24dp</item>
     </style>
 
     <!-- bottom Nav Bar design  -->
