@@ -3,13 +3,13 @@
 
     <!-- todo: styles define the look of a single view, themes for the entire app. implement the modes in themes!-->
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <!--style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 
 
 
 
 
-    </style>
+    </style-->
 
 
 
