@@ -17,7 +17,7 @@
         android:contentDescription="@string/startnewactivity"
         android:onClick="onFloatingActionButtonClick"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_add"
         tools:visibility="visible" />
@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="9dp">
 
@@ -59,7 +59,9 @@
             android:id="@+id/headder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:textSize="24sp"
+            android:text="TextView"
+            android:textColor="@color/L_powder_blue"/>
 
         <Space
             android:layout_width="match_parent"
@@ -79,9 +81,9 @@
             android:id="@+id/statisticsFragmentView"
             android:name="de.hdmstuttgart.trackmaster.homeScreen.StatisticFragment"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -135,13 +137,13 @@
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="0dp"
+        android:id="@+id/bottom_nav_bar"
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
+        app:menu="@menu/nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
