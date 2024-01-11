@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="TrackMaster"
         android:textSize="24sp"
+        android:textColor="@color/medium_blue"
 />
 
     <androidx.fragment.app.FragmentContainerView
@@ -20,13 +21,15 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation"
         android:layout_below="@id/textViewTrackmasterHeadder"/>
-    
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/nav_menu"/>
+        android:addStatesFromChildren="false"
+        app:labelVisibilityMode="auto"
+        app:menu="@menu/nav_menu" />
 
 
     <!--todo: set the right colors here
