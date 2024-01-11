@@ -1,4 +1,4 @@
-package de.hdmstuttgart.settings
+package de.hdmstuttgart.trackmaster.settings
 
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences

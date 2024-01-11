@@ -37,10 +37,6 @@ class TrackFragment : Fragment(R.layout.fragment_tracks), TrackClickListener {
             val trackMasterApplication = fragmentActivity.application as TrackMasterApplication
 
             lifecycleScope.launch(Dispatchers.IO) {
-                //todo: remove test tracks //todo: inserting a track into the database has to happen whenever tracking is stopped
-                trackMasterApplication.repository.deleteAll()
-                trackMasterApplication.repository.insert(Track(distance = 2, time = 20))
-                trackMasterApplication.repository.insert(Track(distance = 5, time = 45))
 
                 data.clear()
                 data.addAll(trackMasterApplication.repository.getAllTracks())
