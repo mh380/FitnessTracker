@@ -21,10 +21,10 @@ class TrackAdapter(private val list: List<Track>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val trackModel = list[position]
-        holder.dateView.append(" " + trackModel.date.toString()) //todo: might change that
-        holder.distanceView.append(" " + trackModel.distance.toString())
-        holder.timeView.append(" " + trackModel.time.toString())
-        holder.paceView.append(" " + trackModel.pace.toString())
+        holder.dateView.text = ("Date: " + trackModel.date) //todo: might change that
+        holder.distanceView.text = ("Distance: " + trackModel.distance + " km")
+        holder.timeView.text = ("Time: " + trackModel.time + " minutes")
+        holder.paceView.text = ("Average Pace: " + trackModel.pace + " km/minute")
 
         holder.itemView.setOnClickListener {
             trackClickListener.onTrackClickListener(position)
@@ -36,9 +36,9 @@ class TrackAdapter(private val list: List<Track>,
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val dateView: TextView = itemView.findViewById(R.id.date)
-        val distanceView: TextView = itemView.findViewById(R.id.distance)
-        val timeView: TextView = itemView.findViewById(R.id.time)
-        val paceView: TextView = itemView.findViewById(R.id.pace)
+        val dateView: TextView = itemView.findViewById(R.id.dateView)
+        val distanceView: TextView = itemView.findViewById(R.id.distanceView)
+        val timeView: TextView = itemView.findViewById(R.id.timeView)
+        val paceView: TextView = itemView.findViewById(R.id.paceView)
     }
 }

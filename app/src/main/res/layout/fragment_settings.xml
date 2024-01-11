@@ -6,7 +6,7 @@
     style="@style/SCREEN"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.hdmstuttgart.settings.SettingsActivity">
+    tools:context=".homeScreen.HomeFragment">
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/darkLightSwitch"
@@ -17,9 +17,7 @@
         android:checked="false"
         android:scaleX="1.2"
         android:scaleY="1.2"
-        android:text="@string/dark_mode_disabled"
-        android:textOff="@string/dark_mode_disabled"
-        android:textOn="@string/dark_mode_enabled"
+        android:text="@string/dark_mode"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

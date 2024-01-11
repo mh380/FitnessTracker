@@ -33,6 +33,18 @@ class TrackRepository(private val trackDao: TrackDao) {
         return trackDao.getTracksFromYear(targetYear)
     }
 
+    fun getMaxDistance(): Int {
+        return trackDao.getMaxDistance()
+    }
+
+    fun getMaxTime(): Int {
+        return trackDao.getMaxTime()
+    }
+
+    fun getMaxPace(): Float {
+        return trackDao.getMaxPace()
+    }
+
     @WorkerThread
     suspend fun insert(track: Track) {
         trackDao.insert(track)

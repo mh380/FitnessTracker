@@ -84,11 +84,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
             lifecycleScope.launch(Dispatchers.IO) {
 
-                //todo: remove test tracks
-                trackMasterApplication.repository.deleteAll()
-                trackMasterApplication.repository.insert(Track(distance = 2, time = 20))
-                trackMasterApplication.repository.insert(Track(distance = 5, time = 45))
-
                 val allTracks = trackMasterApplication.repository.getAllTracks()
                 for(track in allTracks) {
                     val input = BarchartInput(track.distance, track.date.toString())
