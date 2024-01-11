@@ -42,7 +42,8 @@ import kotlinx.coroutines.withContext
 
 class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
-    private val defaultMaxHeight = 100.dp
+    private val defaultMaxHeight = 200.dp //defines max height for bars
+    private var barchartInputList: MutableList<BarchartInput> = mutableListOf()
 
 
     override fun onCreateView(
@@ -53,26 +54,35 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         return inflater.inflate(R.layout.fragment_statistic, container, false).apply {
             ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 
-            findViewById<ComposeView>(R.id.composeView).setContent {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.LightGray
-                ) {
-                    BarChart(getInput())
+            lifecycleScope.launch(Dispatchers.IO) {
+                getInput()
+
+                withContext(Dispatchers.Main) {
+                    findViewById<ComposeView>(R.id.composeView).setContent {
+                        Surface(
+                            modifier = Modifier.fillMaxSize(),
+                            color = Color.LightGray
+                        ) {
+                            if(barchartInputList.isEmpty()){
+                                Text(text =  "No data, start tracking your activities.")
+                            } else {
+                                BarChart(barchartInputList)
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 
-   private fun getInput(): List<BarchartInput> {
-        val barchartInputList: MutableList<BarchartInput> = mutableListOf()
+    private fun getInput() {
+
 
         activity?.let {
             val fragmentActivity = it
             val trackMasterApplication = fragmentActivity.application as TrackMasterApplication
 
             lifecycleScope.launch(Dispatchers.IO) {
-
 
                 //todo: remove test tracks
                 trackMasterApplication.repository.deleteAll()
@@ -86,7 +96,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 }
             }
         }
-       return barchartInputList
     }
 
 
@@ -96,9 +105,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         modifier: Modifier = Modifier,
         maxHeight: Dp = defaultMaxHeight
     ) {
-        if(inputList.isNotEmpty()) {
-            Text(text =  "No data, start tracking your activities.")
-        }
 
         val borderColor = Color(R.color.black)
         val density = LocalDensity.current
