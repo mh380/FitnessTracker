@@ -17,6 +17,8 @@
         <item name="floatingActionButtonStyle">@style/floatAButton</item>
         <item name="buttonStyle">@style/playPause</item>
         <!-- Fragment style insert -->
+        <item name="switchStyle">@style/toggleButton</item>
+        <item name="materialIconButtonOutlinedStyle">@style/endButton</item>
 
 
     </style>
@@ -64,27 +66,27 @@
     </style>
 
     <!--end session button -->
-    <style name="" parent="">
+    <style name="endButton" parent="Widget.Material3.Button.OutlinedButton">
         <item name="android:background">@color/D_background_black</item>
         <item name="android:color">@color/sky_blue</item>
         <item name="android:textColor">@color/sky_blue</item>
         <item name="android:colorControlActivated">@color/L_light_blue</item>
     </style>
 
-    <!-- Headding trackmaster text -->
+    <!-- Headding trackmaster text im layout xml -->
 
 
-    <!--  track view -->
+    <!--  track view
     <style name="" parent="">
         <item name="">@color/D_secondary_black</item>
         <item name="android:textColor">@color/D_text_white</item>
          todo: dark blue highlighted headline text color
          <item name="">@color/L_dark_blue</item>
-    </style>
+    </style> -->
 
 
     <!-- settings toggle -->
-    <style name="" parent="">
+    <style name="toggleButton" parent="Widget.Material3.CompoundButton.MaterialSwitch">
         <item name="android:background">@color/medium_blue</item>
         <item name="android:colorAccent">@color/sky_blue</item>
     </style>
