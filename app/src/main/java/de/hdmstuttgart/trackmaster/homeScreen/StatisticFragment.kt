@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,16 +28,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.TrackMasterApplication
 import de.hdmstuttgart.trackmaster.data.BarchartInput
-import de.hdmstuttgart.trackmaster.data.Track
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -44,6 +43,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
     private val defaultMaxHeight = 200.dp //defines max height for bars
     private var barchartInputList: MutableList<BarchartInput> = mutableListOf()
+    private var listSum: Int = 0
 
 
     override fun onCreateView(
@@ -60,8 +60,10 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 withContext(Dispatchers.Main) {
                     findViewById<ComposeView>(R.id.composeView).setContent {
                         Surface(
-                            modifier = Modifier.fillMaxSize(),
-                            color = Color.LightGray
+                            modifier = Modifier.padding(16.dp).fillMaxSize(),
+                            color = Color.White,
+                            shape = RoundedCornerShape(16.dp),
+                            elevation = 8.dp,
                         ) {
                             if(barchartInputList.isEmpty()){
                                 Text(text =  "No data, start tracking your activities.")
@@ -97,59 +99,79 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     @Composable
     fun BarChart(
         inputList: List<BarchartInput>,
-        modifier: Modifier = Modifier,
-        maxHeight: Dp = defaultMaxHeight
+        modifier: Modifier = Modifier
     ) {
 
         val borderColor = Color(R.color.black)
         val density = LocalDensity.current
         val strokeWidth = with(density) { 1.dp.toPx() }
 
-        Row(
-            modifier = modifier.then(
-                Modifier
-                    .fillMaxWidth()
-                    .height(maxHeight)
-                    .drawBehind {
-                        // draw X-Axis
-                        drawLine(
-                            color = borderColor,
-                            start = Offset(0f, size.height),
-                            end = Offset(size.width, size.height),
-                            strokeWidth = strokeWidth
-                        )
-                        // draw Y-Axis
-                        drawLine(
-                            color = borderColor,
-                            start = Offset(0f, 0f),
-                            end = Offset(0f, size.height),
-                            strokeWidth = strokeWidth
-                        )
-                    }
-            ),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Bottom
+        Column (
+            modifier = Modifier.padding(8.dp),
         ) {
-            inputList.forEach { item ->
-                Bar(
-                    input = item,
-                    color = Color(0xFF03DAC5), //todo: change color (add it to colors.xml and reference it here)
-                    maxHeight = maxHeight,
-                    description = item.date
-                )
+
+            Text(
+                text = "Your Statistics",
+                modifier = Modifier.padding(8.dp),
+            )
+
+            Row(
+                modifier = modifier.then(
+                    Modifier
+                        .fillMaxWidth()
+                        .height(defaultMaxHeight)
+                        .drawBehind {
+                            // draw X-Axis
+                            drawLine(
+                                color = borderColor,
+                                start = Offset(0f, size.height),
+                                end = Offset(size.width, size.height),
+                                strokeWidth = strokeWidth
+                            )
+                            // draw Y-Axis
+                            drawLine(
+                                color = borderColor,
+                                start = Offset(0f, 0f),
+                                end = Offset(0f, size.height),
+                                strokeWidth = strokeWidth
+                            )
+                        }
+                ),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom,
+            ) {
+                listSum = inputList.sumOf { it.distance }
+
+                inputList.forEach { item ->
+                    Bar(
+                        input = item,
+                    )
+                }
+            }
+            Row(
+                modifier = modifier.then(
+                    Modifier
+                        .fillMaxWidth()
+                ),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                inputList.forEach { item ->
+                    Text(
+                        text = item.date,
+                    )
+                }
             }
         }
     }
 
     @Composable
     fun RowScope.Bar(
-        input: BarchartInput,
-        color: Color,
-        maxHeight: Dp,
-        description: String
+        input: BarchartInput
     ) {
+        val color = Color(R.color.medium_blue) //todo: change color (add it to colors.xml and reference it here)
+
         val value = input.distance
-        val itemHeight = remember(value) { value * maxHeight.value / 100 }
+        val itemHeight = remember(value) { value * (defaultMaxHeight.value - 0.5) / listSum}
 
         Spacer(
             modifier = Modifier
@@ -159,8 +181,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 .background(color)
         )
     }
-
-
 
 
     //old version
