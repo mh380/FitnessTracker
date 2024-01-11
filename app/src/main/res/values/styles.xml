@@ -4,13 +4,11 @@
 <!--
     &lt;!&ndash; todo: styles define the look of a single view, themes for the entire app. implement the modes in themes!&ndash;&gt;
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-
-
-
-
-
+    <style name="blueText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/medium_blue</item>
     </style>
+
+
 -->
 
 

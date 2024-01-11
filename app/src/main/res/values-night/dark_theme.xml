@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.TrackMaster" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
+
         <item name="colorPrimary">@color/medium_blue</item>
         <item name="colorPrimaryVariant">@color/dark_blue</item>
         <item name="colorOnPrimary">@color/D_text_white</item>
@@ -9,7 +10,7 @@
         <item name="colorSecondary">@color/sky_blue</item>
         <item name="colorSecondaryVariant">@color/L_light_blue</item>
         <item name="colorOnSecondary">@color/L_text_black</item>
-        <item name="android:textColor">@color/L_text_black</item>
+        <item name="android:textColor">@color/D_text_white</item>
 
         <item name="android:textSize">32sp</item>
 
@@ -21,24 +22,26 @@
         <item name="materialIconButtonOutlinedStyle">@style/endButton</item>
 
 
+
     </style>
 
 
-    <!-- todo: what is this?! -->
+    <!-- todo: what is this?!
     <style name="a" parent="">
         <item name="android:background">@color/D_background_black</item>
         <item name="android:textColor">@color/D_text_white</item>
-        <item name="android:textSize">24dp</item>
+        <item name="android:textSize">24sp</item>
         <item name="colorPrimary">@color/medium_blue</item>
         <item name="colorAccent">@color/sky_blue</item>
-    </style>
+    </style> -->
 
 
     <!-- bottom Nav Bar design -->
     <style name="bottomNav" parent="Widget.Material3.BottomNavigationView">
         <item name="android:background">@color/medium_blue</item>
-        <item name="android:negativeButtonText">@color/D_text_white</item>
+        <item name="itemTextColor">@color/D_text_white</item>
         <item name="android:textSize">20sp</item>
+        <item name="itemIconTint">@color/D_text_white</item>
         <item name="android:checked">@color/sky_blue</item>
         <!-- the 3 Icons may need to be modified here -->
     </style>
@@ -76,21 +79,26 @@
     <!-- Headding trackmaster text im layout xml -->
 
 
-    <!--  track view
+    <!--  todo: track view fragment style
     <style name="" parent="">
         <item name="">@color/D_secondary_black</item>
         <item name="android:textColor">@color/D_text_white</item>
-         todo: dark blue highlighted headline text color
+         dark blue highlighted headline text color
          <item name="">@color/L_dark_blue</item>
     </style> -->
 
 
     <!-- settings toggle -->
     <style name="toggleButton" parent="Widget.Material3.CompoundButton.MaterialSwitch">
-        <item name="android:background">@color/medium_blue</item>
-        <item name="android:colorAccent">@color/sky_blue</item>
+        <item name="trackTint">@color/medium_blue</item>
+        <item name="thumbTint">@color/dark_blue</item>
     </style>
 
+    <!-- Track master text color -->
+    <style name="headingText" parent="">
+        <item name="android:textColor">@color/medium_blue</item>
+        <item name="android:textSize">24sp</item>
+    </style>
 
 
     <!-- todo: Map color change? dark mode may be exclusive to google maps -->
