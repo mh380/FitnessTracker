@@ -11,6 +11,7 @@ import de.hdmstuttgart.trackmaster.homeScreen.HomeFragment
 import de.hdmstuttgart.trackmaster.trackScreen.TrackFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
             trackMasterApplication.repository.deleteAll()
             trackMasterApplication.repository.insert(Track(distance = 2, time = 20))
             trackMasterApplication.repository.insert(Track(distance = 5, time = 45))
+            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(1), distance = 12, time = 25))
+            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(10), distance = 12, time = 25))
+            trackMasterApplication.repository.insert(Track(date = LocalDate.parse("2024-02-15"), distance = 15, time = 30))
         }
 
 

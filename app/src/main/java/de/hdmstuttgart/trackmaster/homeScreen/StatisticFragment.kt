@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -16,9 +17,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,16 +41,24 @@ import androidx.lifecycle.lifecycleScope
 import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.TrackMasterApplication
 import de.hdmstuttgart.trackmaster.data.BarchartInput
+import de.hdmstuttgart.trackmaster.data.Track
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
 
 
 class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
     private val defaultMaxHeight = 200.dp //defines max height for bars
     private var barchartInputList: MutableList<BarchartInput> = mutableListOf()
-    private var listSum: Int = 0
+    private var listSum = 0
+    private var currentTimeSpan = "Week"
+
+    private lateinit var inflater: LayoutInflater
+    private var container: ViewGroup? = null
+    private var savedInstanceState: Bundle? = null
+
 
 
     override fun onCreateView(
@@ -51,22 +66,55 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        this.inflater = inflater
+        this.container = container
+        this.savedInstanceState = savedInstanceState
         return inflater.inflate(R.layout.fragment_statistic, container, false).apply {
             ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 
-            lifecycleScope.launch(Dispatchers.IO) {
+            update(container)
+            /*lifecycleScope.launch(Dispatchers.IO) {
                 getInput()
 
                 withContext(Dispatchers.Main) {
                     findViewById<ComposeView>(R.id.composeView).setContent {
                         Surface(
-                            modifier = Modifier.padding(16.dp).fillMaxSize(),
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .fillMaxSize(),
                             color = Color.White,
                             shape = RoundedCornerShape(16.dp),
                             elevation = 8.dp,
                         ) {
-                            if(barchartInputList.isEmpty()){
-                                Text(text =  "No data, start tracking your activities.")
+                            if (barchartInputList.isEmpty()) {
+                                Text(text = "No data, start tracking your activities.")
+                            } else {
+                                BarChart(barchartInputList)
+                            }
+                        }
+                    }
+                }
+            }*/
+        }
+    }
+
+    private fun update(container: ViewGroup?) {
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                getInput()
+
+                withContext(Dispatchers.Main) {
+                    container!!.findViewById<ComposeView>(R.id.composeView).setContent {
+                        Surface(
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .fillMaxSize(),
+                            color = Color.White,
+                            shape = RoundedCornerShape(16.dp),
+                            elevation = 8.dp,
+                        ) {
+                            if (barchartInputList.isEmpty()) {
+                                Text(text = "No data, start tracking your activities.")
                             } else {
                                 BarChart(barchartInputList)
                             }
@@ -75,10 +123,10 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 }
             }
         }
-    }
 
     private fun getInput() {
 
+        val currentDate = LocalDate.now()
 
         activity?.let {
             val fragmentActivity = it
@@ -86,8 +134,17 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
             lifecycleScope.launch(Dispatchers.IO) {
 
-                val allTracks = trackMasterApplication.repository.getAllTracks()
-                for(track in allTracks) {
+                barchartInputList.clear()
+                var allTracks: List<Track>
+
+                when (currentTimeSpan) {
+                    "Week" -> allTracks = trackMasterApplication.repository.getTracksFromWeek(currentDate)
+                    "Month" -> allTracks = trackMasterApplication.repository.getTracksFromMonth(currentDate.month)
+                    "Year" -> allTracks = trackMasterApplication.repository.getTracksFromYear(currentDate.year.toString())
+                    else -> allTracks = trackMasterApplication.repository.getTracksFromWeek(currentDate)
+                }
+
+                for (track in allTracks) {
                     val input = BarchartInput(track.distance, track.date.toString())
                     barchartInputList.add(input)
                 }
@@ -106,14 +163,21 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         val density = LocalDensity.current
         val strokeWidth = with(density) { 1.dp.toPx() }
 
-        Column (
+        Column(
             modifier = Modifier.padding(8.dp),
         ) {
 
-            Text(
-                text = "Your Statistics",
-                modifier = Modifier.padding(8.dp),
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text(
+                    text = "Your Statistics",
+                    modifier = Modifier.padding(8.dp),
+                )
+                DropDown()
+            }
+
 
             Row(
                 modifier = modifier.then(
@@ -168,10 +232,11 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     fun RowScope.Bar(
         input: BarchartInput
     ) {
-        val color = Color(R.color.medium_blue) //todo: change color (add it to colors.xml and reference it here)
+        val color =
+            Color(R.color.medium_blue) //todo: change color (add it to colors.xml and reference it here)
 
         val value = input.distance
-        val itemHeight = remember(value) { value * (defaultMaxHeight.value - 0.5) / listSum}
+        val itemHeight = remember(value) { value * (defaultMaxHeight.value - 0.5) / listSum }
 
         Spacer(
             modifier = Modifier
@@ -183,74 +248,42 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     }
 
 
-    //old version
+    @Composable
+    fun DropDown() {
+        val list = listOf("Week", "Month", "Year")
+        val expanded = remember { mutableStateOf(false) }
+        val currentValue = remember { mutableStateOf(list[0]) }
 
-    /*Row(
-            verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = modifier
-        ) {
-            val listSum by remember {
-                mutableStateOf(inputList.sumOf { it.value })
-            }
-            inputList.forEach { input ->
-                val percentage = input.value / listSum.toFloat()
-                Bar(
-                    modifier = Modifier
-                        .height(120.dp * percentage * inputList.size)
-                        .width(40.dp),
-                    percentage = input.value / listSum.toFloat(),
-                    description = input.timespan,
-                    showDescription = showDescription
-                )
-            }
-        }*/
+        Box() {
 
-    /*@Composable
-    fun Bar(
-        modifier: Modifier = Modifier,
-        primaryColor: Color = Color(0xFF03DAC5), //todo: change color (add it to colors.xml and reference it here)
-        percentage: Float,
-        description: String,
-        showDescription: Boolean
-    ) {
-        Box(
-            modifier = modifier,
-            contentAlignment = Alignment.Center
-        ) {
-            Canvas(
-                modifier = Modifier.fillMaxSize()
+            Row(
+                modifier = Modifier
+                    .clickable { expanded.value = !expanded.value }
+                    .align(Alignment.TopEnd)
             ) {
-                val width = size.width
-                val height = size.height
+                Text(text = currentValue.value)
+                Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = null)
 
-                val path = Path().apply {
-                    moveTo(0f, height)
-                    lineTo(width, height)
-                    lineTo(width, 0f)
-                    lineTo(0f, 0f)
-                    close()
-                }
-                drawPath(
-                    path,
-                    brush = Brush.linearGradient(
-                        colors = listOf(Color(("0x" + R.color.black).toInt()), primaryColor)
-                    )
-                )
+                DropdownMenu(
+                    expanded = expanded.value,
+                    onDismissRequest = { expanded.value = false },
+                ) {
+                    list.forEach {
 
-                drawContext.canvas.nativeCanvas.apply {
-                    drawText(
-                        "date", //todo: here has to stand the date/ week/ month
-                        width / 5f,
-                        height + 55f,
-                        android.graphics.Paint().apply {
-                            this.color = R.color.black.toColor().toArgb()
-                            textSize = 11.dp.toPx()
-                            isFakeBoldText = true
+                        DropdownMenuItem(
+                            onClick = {
+                                currentValue.value = it
+                                currentTimeSpan = it
+                                expanded.value = false
+                                //todo: barchart needs to be rebuild
+                                update(container)
+                            }
+                        ) {
+                            Text(text = it)
                         }
-                    )
+                    }
                 }
             }
         }
-    }*/
+    }
 }
