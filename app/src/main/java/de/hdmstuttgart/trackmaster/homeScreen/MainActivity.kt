@@ -1,33 +1,39 @@
 package de.hdmstuttgart.trackmaster.homeScreen
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import de.hdmstuttgart.settings.SettingsActivity
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import de.hdmstuttgart.trackmaster.R
-import de.hdmstuttgart.trackmaster.newActivityScreen.NewActivity
-import de.hdmstuttgart.trackmaster.trackScreen.TrackActivity
+import de.hdmstuttgart.settings.SettingsFragment
+import de.hdmstuttgart.trackmaster.trackScreen.TrackFragment
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val homeFragment = HomeFragment()
+        val tracksFragment = TrackFragment()
+        val settingsFragment = SettingsFragment()
+
+        makeCurrentFragment(homeFragment)
+
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.ic_home -> makeCurrentFragment(homeFragment)
+                R.id.ic_tracks -> makeCurrentFragment(tracksFragment)
+                R.id.ic_settings -> makeCurrentFragment(settingsFragment)
+            }
+            true
+        }
     }
 
-    fun onFloatingActionButtonClick(view: View) {
-        val intent = Intent(this, NewActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun onSettingsButtonClick (view: View) {
-        val intent = Intent(this, SettingsActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun onTrackButtonClick (view: View) {
-        val intent = Intent(this, TrackActivity::class.java)
-        startActivity(intent)
-    }
+    private fun makeCurrentFragment(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_wrapper, fragment)
+            commit()
+        }
 }

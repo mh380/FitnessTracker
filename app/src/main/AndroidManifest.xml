@@ -35,7 +35,7 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name=".homeScreen.MenuActivity"
+            android:name=".homeScreen.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,12 +45,6 @@
         </activity>
         <activity
             android:name=".newActivityScreen.NewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".trackScreen.TrackActivity"
-            android:exported="false" />
-        <activity
-            android:name="de.hdmstuttgart.settings.SettingsActivity"
             android:exported="false" />
     </application>
 
