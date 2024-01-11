@@ -6,11 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".homeScreen.MainActivity">
 
+    <TextView
+        android:id="@+id/textViewTrackmasterHeadder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TrackMaster"
+        android:textSize="24sp"
+/>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fl_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigation"/>
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_below="@id/textViewTrackmasterHeadder"/>
     
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -18,10 +27,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/nav_menu"/>
-        <!--todo: set the right colors here
-        app:itemBackground=""
-        app:itemIconTint=""
-        app:itemTextColor=""-->
+
+
+    <!--todo: set the right colors here
+    app:itemBackground=""
+    app:itemIconTint=""
+    app:itemTextColor=""-->
 
 
 </RelativeLayout>

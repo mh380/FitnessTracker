@@ -3,86 +3,100 @@
     <style name="Base.Theme.TrackMaster" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/medium_blue</item>
-        <item name="colorPrimaryVariant">@color/L_light_blue</item>
-        <item name="colorOnPrimary">@color/D_text_white</item>
+        <item name="colorPrimaryVariant"></item>
+        <item name="colorOnPrimary"></item>
 
-        <item name="colorSecondary">@color/medium_blue</item>
-        <item name="colorSecondaryVariant">@color/sky_blue</item>
-        <item name="colorOnSecondary">@color/D_text_white</item>
+        <item name="colorSecondary"></item>
+        <item name="colorSecondaryVariant"></item>
+        <item name="colorOnSecondary"></item>
+        <item name="android:textColor"></item>
+
+        <item name="android:textSize">32sp</item>
+
+        <item name="bottomNavigationStyle">@style/bottomNav</item>
+        <item name="floatingActionButtonStyle">@style/floatAButton</item>
+        <item name="buttonStyle">@style/playPause</item>
+        <!-- Fragment style insert -->
+        <item name="switchStyle">@style/toggleButton</item>
+        <item name="materialIconButtonOutlinedStyle">@style/endButton</item>
+        <item name="android:textViewStyle">@style/headingText</item>
+
+
     </style>
 
-    <style name="Theme.TrackMaster" parent="Base.Theme.TrackMaster" />
 
-    <!-- Light mode  -->
-    <style name="SCREEN">
-        <item name="android:background">@color/L_background_white</item>
-        <item name="android:textColor">@color/L_text_black</item>
-        <item name="android:textSize">24dp</item>
+    <!-- todo: what is this?! -->
+    <style name="a" parent="">
+        <item name="android:background"></item>
+        <item name="android:textColor"></item>
+        <item name="android:textSize">24sp</item>
+        <item name="colorPrimary"></item>
+        <item name="colorAccent"></item>
     </style>
 
-    <!-- bottom Nav Bar design  -->
-    <style name="NavBar" parent="Widget.Material3.BottomNavigationView">
-        <item name="android:background">@color/medium_blue</item>
-        <item name="android:textColor">@color/L_background_white</item>
-        <item name="android:activatedBackgroundIndicator">@color/sky_blue</item>
+
+    <!-- bottom Nav Bar design -->
+    <style name="bottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background"></item>
+        <item name="android:negativeButtonText"></item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:checked"></item>
         <!-- the 3 Icons may need to be modified here -->
     </style>
 
     <!-- Floating Action button style -->
-    <style name="FAButton" parent="ShapeAppearanceOverlay.Material3.FloatingActionButton">
-        <item name="android:background">@color/medium_blue</item>
-        <item name="android:textColor">@color/L_background_white</item>
-        <item name="android:colorControlActivated">@color/sky_blue</item>
-        <!-- drop shadow -->
+    <style name="floatAButton" parent="Widget.Design.FloatingActionButton">
+        <item name="backgroundTint"></item>
+        <item name="android:textAppearanceButton"></item>
+        <item name="android:colorActivatedHighlight"></item>
+        <!-- icon size -->
+        <!-- drop shadow color? -->
     </style>
 
     <!-- Statistic cards -->
-    <!-- Card view containing image view and text view -->
-    <style name="StatCards" parent="Widget.Material3.CardView.Elevated">
-        <item name="android:background">@color/L_background_white</item>
-        <item name="android:textColor">@color/L_text_black</item>
+    <style name="statisticsFrag" parent="Widget.Material3.CardView.Elevated">
+        <!-- todo: the fragment itself must contain the style elements:
+         shadow
+         corner radius -->
     </style>
-
-    <!-- todo: Statistics colors
-    <style name="" patent="">
-        <item name="android:textcolor">@color/L_background_white</item>
-        <item name=" underline ">@color/L_dark_blue</item>
-        <item name=" bar color">@color/L_medium_blue</item>
-    </style>
-    -->
 
     <!-- Play/Pause Button -->
-    <style name="PlayPauseButton" parent="Widget.Material3.MaterialTimePicker.ImageButton">
-        <item name="android:background">@color/medium_blue</item>
-        <item name="android:colorControlActivated">@color/sky_blue</item>
+    <style name="playPause" parent="Widget.MaterialComponents.Button">
+        <item name="android:background"></item>
+        <item name="android:colorControlActivated"></item>
     </style>
 
-    <!-- end session button  -->
-    <style name="EndSessionButton" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="android:background">@color/L_background_white</item>
-        <item name="android:color">@color/medium_blue</item>
-        <item name="android:textColor">@color/medium_blue</item>
-        <item name="android:colorControlActivated">@color/sky_blue</item>
+    <!--end session button -->
+    <style name="endButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:background"></item>
+        <item name="android:color"></item>
+        <item name="android:textColor"></item>
+        <item name="android:colorControlActivated"></item>
     </style>
 
-    <!-- Headding trackmaster text -->
+    <!-- Headding trackmaster text im layout xml -->
 
 
-    <!-- track view -->
-    <style name="trackView" parent="Widget.Material3.CardView.Filled">
-        <item name="android:background">@color/L_light_blue</item>
-        <item name="android:textColor">@color/L_background_white</item>
-        <!-- todo: dark blue highlighted headline text color
+    <!--  todo: track view fragment style
+    <style name="" parent="">
+        <item name="">@color/D_secondary_black</item>
+        <item name="android:textColor">@color/D_text_white</item>
+         dark blue highlighted headline text color
          <item name="">@color/L_dark_blue</item>
-         -->
-    </style>
+    </style> -->
+
 
     <!-- settings toggle -->
-    <style name="settingsToggle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="android:background">@color/L_light_blue</item>
-        <item name="android:colorAccent">@color/L_powder_blue</item>
+    <style name="toggleButton" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="android:background"></item>
+        <item name="android:colorAccent"></item>
     </style>
 
+    <!-- Track master text color -->
+    <style name="headingText" parent="">
+        <item name="android:textColor"></item>
+        <item name="android:textSize">24sp</item>
+    </style>
 
 
     <!-- todo: Map color change? dark mode may be exclusive to google maps -->

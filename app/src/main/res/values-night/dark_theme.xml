@@ -19,6 +19,7 @@
         <!-- Fragment style insert -->
         <item name="switchStyle">@style/toggleButton</item>
         <item name="materialIconButtonOutlinedStyle">@style/endButton</item>
+        <item name="android:textViewStyle">@style/headingText</item>
 
 
     </style>
@@ -28,7 +29,7 @@
     <style name="a" parent="">
         <item name="android:background">@color/D_background_black</item>
         <item name="android:textColor">@color/D_text_white</item>
-        <item name="android:textSize">24dp</item>
+        <item name="android:textSize">24sp</item>
         <item name="colorPrimary">@color/medium_blue</item>
         <item name="colorAccent">@color/sky_blue</item>
     </style>
@@ -76,11 +77,11 @@
     <!-- Headding trackmaster text im layout xml -->
 
 
-    <!--  track view
+    <!--  todo: track view fragment style
     <style name="" parent="">
         <item name="">@color/D_secondary_black</item>
         <item name="android:textColor">@color/D_text_white</item>
-         todo: dark blue highlighted headline text color
+         dark blue highlighted headline text color
          <item name="">@color/L_dark_blue</item>
     </style> -->
 
@@ -91,6 +92,11 @@
         <item name="android:colorAccent">@color/sky_blue</item>
     </style>
 
+    <!-- Track master text color -->
+    <style name="headingText" parent="">
+        <item name="android:textColor">@color/medium_blue</item>
+        <item name="android:textSize">24sp</item>
+    </style>
 
 
     <!-- todo: Map color change? dark mode may be exclusive to google maps -->
