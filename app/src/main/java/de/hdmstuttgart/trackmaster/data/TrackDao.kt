@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import java.time.LocalDate
 
 @Dao
 interface TrackDao {
@@ -12,13 +13,14 @@ interface TrackDao {
     @Query("SELECT * FROM track")
     fun getAllTracks(): List<Track>
 
-    /*@Query("SELECT * FROM track WHERE toLocalDate(date) BETWEEN :startDate AND :endDate")
-    fun getTracksFromWeek(startDate: LocalDate, endDate: LocalDate): List<Track> */
+    @Query("SELECT * FROM track WHERE date BETWEEN :startDate AND :endDate ORDER BY DATE")
+    fun getTracksFromWeek(startDate: String, endDate: String): List<Track>
 
-    @Query("SELECT * FROM track WHERE SUBSTRING(date, 6, 2)=:month")
+    //@Query("SELECT * FROM track WHERE substr(date, 6, 2)=:month")
+    @Query("SELECT * FROM track WHERE substr(date, 6, 2) = :month ORDER BY date")
     fun getTracksFromMonth(month: String): List<Track>
 
-    @Query("SELECT * FROM track WHERE SUBSTRING(date, 1, 4)=:year")
+    @Query("SELECT * FROM track WHERE substr(date, 1, 4) = :year ORDER BY date")
     fun getTracksFromYear(year: String): List<Track>
 
     @Query("SELECT MAX (distance) FROM track")
