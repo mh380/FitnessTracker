@@ -4,6 +4,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.google.android.material.switchmaterial.SwitchMaterial
 import de.hdmstuttgart.trackmaster.R
@@ -24,13 +25,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         darkLightSwitch.setOnCheckedChangeListener { _, isChecked ->
             // Theme basierend auf dem Switch-Status ändern
-            this.requireActivity().setTheme(
-                if (isChecked) {
-                    R.style.Base_Theme_TrackMaster
-                } else {
-                    R.style.Theme_TrackMaster
-                }
-            )
+            // die themes für light und dark haben den selben namen, der unterschied ist die AppCompatDelegate value
+
+            when (isChecked) {
+
+                true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+                false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+
 
             // Aktivität aktualisieren, um die Änderungen anzuwenden
             refreshFragment()
