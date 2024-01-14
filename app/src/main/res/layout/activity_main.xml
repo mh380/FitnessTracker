@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    style="@style/screenBackground">
 
     <TextView
         android:id="@+id/textViewTrackmasterHeadder"
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="TrackMaster"
         android:textSize="24sp"
-        android:textColor="@color/medium_blue"
+        style="@style/textHighlight"
 />
 
     <androidx.fragment.app.FragmentContainerView

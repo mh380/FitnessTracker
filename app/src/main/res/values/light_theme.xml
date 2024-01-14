@@ -25,17 +25,25 @@
 
     </style>
 
+    <style name="screenBackground" >
+        <item name="android:background">@color/L_background_white</item>
+    </style>
 
-    <!-- todo: what is this?!
-    <style name="a" parent="">
-        <item name="android:background">@color/D_background_black</item>
-        <item name="android:textColor">@color/D_text_white</item>
-        <item name="android:textSize">24sp</item>
-        <item name="colorPrimary">@color/medium_blue</item>
-        <item name="colorAccent">@color/sky_blue</item>
-    </style> -->
+    <!-- text color change for the headding text at the top of the screen  -->
+    <style name="textHighlight">
+        <item name="android:textColor">@color/L_light_blue</item>
+    </style>
 
+    <!-- style for any kinds of view, only changes background color with theme -->
+    <style name="viewStyle">
+        <item name="android:background">@color/L_light_blue</item>
+    </style>
 
+    <!-- unused styling for search view -->
+    <style name="searchViewDesign">
+        <item name="android:background">@color/L_background_white</item>
+        <item name="android:textColor">@color/L_text_black</item>
+    </style>
 
     <!-- bottom Nav Bar design -->
     <style name="bottomNav" parent="Widget.Material3.BottomNavigationView">
@@ -78,8 +86,6 @@
         <item name="android:colorControlActivated">@color/L_light_blue</item>
     </style>
 
-    <!-- Headding trackmaster text im layout xml -->
-
 
     <!--  todo: track view fragment style
     <style name="" parent="">
@@ -94,12 +100,6 @@
     <style name="toggleButton" parent="Widget.Material3.CompoundButton.MaterialSwitch">
         <item name="trackTint">@color/L_light_blue</item>
         <item name="thumbTint">@color/medium_blue</item>
-    </style>
-
-    <!-- Track master text color -->
-    <style name="headingText" parent="">
-        <item name="android:textColor">@color/L_powder_blue</item>
-        <item name="android:textSize">24sp</item>
     </style>
 
 
