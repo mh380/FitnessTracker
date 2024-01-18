@@ -43,10 +43,16 @@ import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.TrackMasterApplication
 import de.hdmstuttgart.trackmaster.data.BarchartInput
 import de.hdmstuttgart.trackmaster.data.Track
+import de.hdmstuttgart.trackmaster.data.toDay
+import de.hdmstuttgart.trackmaster.data.toDayAndMonth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.format.TextStyle
+import java.time.temporal.TemporalAdjusters
+import java.util.Locale
 
 
 class StatisticFragment : Fragment(R.layout.fragment_statistic) {
@@ -116,15 +122,29 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 val allTracks: List<Track>
 
                 when (currentTimeSpan) {
-                    "Week" -> allTracks = trackMasterApplication.repository.getTracksFromWeek(currentDate)
-                    "Month" -> allTracks = trackMasterApplication.repository.getTracksFromMonth(currentDate.month)
-                    "Year" -> allTracks = trackMasterApplication.repository.getTracksFromYear(currentDate.year.toString())
-                    else -> allTracks = trackMasterApplication.repository.getTracksFromWeek(currentDate)
-                }
+                    "Week" -> {
+                        // Get the start and end date of the current week
+                        val startDate = currentDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+                        val endDate = currentDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY))
 
-                for (track in allTracks) {
-                    val input = BarchartInput(track.distance, track.date.toString())
-                    barchartInputList.add(input)
+                        allTracks = trackMasterApplication.repository.getTracksFromWeek(startDate, endDate)
+
+                        getWeekInput(startDate, allTracks)
+                    }
+                    "Month" -> {
+                        allTracks = trackMasterApplication.repository.getTracksFromMonth(currentDate.month)
+                        for (track in allTracks) {
+                            val input = BarchartInput(track.distance, toDay(track.date))
+                            barchartInputList.add(input)
+                        }
+                    }
+                    "Year" -> {
+                        allTracks = trackMasterApplication.repository.getTracksFromYear(currentDate.year.toString())
+                        for (track in allTracks) {
+                            val input = BarchartInput(track.distance, toDayAndMonth(track.date))
+                            barchartInputList.add(input)
+                        }
+                    }
                 }
             }
         }
@@ -199,7 +219,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
             ) {
                 inputList.forEach { item ->
                     Text(
-                        text = item.date,
+                        text = item.dateString,
                     )
                 }
             }
@@ -259,6 +279,19 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                     }
                 }
             }
+        }
+    }
+
+
+    fun getWeekInput(startDate: LocalDate, allTracks: List<Track>) {
+        for(i in 0..6) {
+            val tracksOfDay = allTracks.filter { track -> track.date == startDate.plusDays(i.toLong()) }
+            var sum = 0
+            for(trackOfDay in tracksOfDay) {
+                sum += trackOfDay.distance
+            }
+            val input = BarchartInput(sum, DayOfWeek.of(i+1).getDisplayName(TextStyle.SHORT, Locale.getDefault()))    //toDayAndMonth(startDate.plusDays(i.toLong()))
+            barchartInputList.add(input)
         }
     }
 }

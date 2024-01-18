@@ -12,19 +12,13 @@ class TrackRepository(private val trackDao: TrackDao) {
         return trackDao.getAllTracks()
     }
 
-    fun getTracksFromWeek(date: LocalDate): List<Track> {
-        // Get the start date of the current week (Monday)
-        val startDate = date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
-
-        // Get the end date of the current week (Sunday)
-        val endDate = date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY))
-
+    fun getTracksFromWeek(startDate: LocalDate, endDate: LocalDate): List<Track> {
         return trackDao.getTracksFromWeek(startDate.toString(), endDate.toString())
     }
 
     fun getTracksFromMonth(month: Month): List<Track> {
         //targetMonth has to be a two-digit-string
-        var targetMonth: String
+        val targetMonth: String
         if(month.value < 10) {
            targetMonth = "0" + month.value
         } else {
