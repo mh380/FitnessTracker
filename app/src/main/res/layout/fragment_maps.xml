@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/viewStyle">
+
+    <!-- todo: search field color and text color change  -->
 
     <fragment
         android:id="@+id/map"
@@ -23,6 +26,6 @@
     android:background="@drawable/bg_search_view"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+    app:layout_constraintTop_toTopOf="parent" />
 
 </RelativeLayout>
