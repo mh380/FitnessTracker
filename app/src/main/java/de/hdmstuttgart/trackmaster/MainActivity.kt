@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //beim Start der App den richtigen Mode anwenden
-        when (getPreferences(MODE_PRIVATE).getBoolean("darkTheme", false)) {
+        val sharedPreferences = getPreferences(MODE_PRIVATE)
+        when (sharedPreferences.getBoolean("darkTheme", false)) {
             true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
@@ -42,7 +43,12 @@ class MainActivity : AppCompatActivity() {
         val tracksFragment = TrackFragment()
         val settingsFragment = SettingsFragment()
 
-        makeCurrentFragment(homeFragment)
+        if(sharedPreferences.getBoolean("settings", false)) {
+            makeCurrentFragment(settingsFragment)
+            sharedPreferences.edit().putBoolean("settings", false).apply()
+        } else {
+            makeCurrentFragment(homeFragment)
+        }
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigation.setOnItemSelectedListener {
