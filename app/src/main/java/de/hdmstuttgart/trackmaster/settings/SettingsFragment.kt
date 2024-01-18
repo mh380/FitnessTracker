@@ -26,24 +26,26 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         darkLightSwitch.setOnCheckedChangeListener { _, isChecked ->
             // Theme basierend auf dem Switch-Status ändern
             // die themes für light und dark haben den selben namen, der unterschied ist die AppCompatDelegate value
-
             when (isChecked) {
-
                 true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
                 false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
-
-
+            this.requireActivity().supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fl_wrapper, SettingsFragment())
+                commit()
+            }
             // Aktivität aktualisieren, um die Änderungen anzuwenden
-            refreshFragment()
+            //refreshFragment()
 
             // Status des SwitchMaterial in den SharedPreferences speichern
             sharedPreferences.edit().putBoolean("darkTheme", isChecked).apply()
         }
-        }
+    }
 
     private fun refreshFragment() {
-        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fl_wrapper, SettingsFragment()).commit()
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_wrapper, SettingsFragment())
+            commit()
+        }
     }
 }

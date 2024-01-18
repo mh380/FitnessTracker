@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -232,9 +233,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     fun RowScope.Bar(
         input: BarchartInput
     ) {
-        val color =
-            Color(R.color.medium_blue) //todo: change color (add it to colors.xml and reference it here)
-
+        val color = Color(R.color.medium_blue) //todo: change color
         val value = input.distance
         val itemHeight = remember(value) { value * (defaultMaxHeight.value - 0.5) / listSum }
 
@@ -275,7 +274,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                                 currentValue.value = it
                                 currentTimeSpan = it
                                 expanded.value = false
-                                //todo: barchart needs to be rebuild
                                 update(container)
                             }
                         ) {

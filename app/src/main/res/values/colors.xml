@@ -2,7 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
 
-
     // light mode colors marked with L
     <color name="L_background_white">#FAFAFA</color>
     <color name="L_text_black">#505050</color>
@@ -20,6 +19,5 @@
     <color name="dark_blue">#0B47A1</color>
     <color name="medium_blue">#1B76D2</color>
     <color name="sky_blue">#62B6F7</color>
-
 
 </resources>
