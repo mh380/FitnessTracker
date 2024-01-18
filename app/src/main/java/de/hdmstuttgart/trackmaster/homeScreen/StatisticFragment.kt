@@ -37,6 +37,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import de.hdmstuttgart.trackmaster.R
@@ -44,12 +45,12 @@ import de.hdmstuttgart.trackmaster.TrackMasterApplication
 import de.hdmstuttgart.trackmaster.data.BarchartInput
 import de.hdmstuttgart.trackmaster.data.Track
 import de.hdmstuttgart.trackmaster.data.toDay
-import de.hdmstuttgart.trackmaster.data.toDayAndMonth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.Month
 import java.time.format.TextStyle
 import java.time.temporal.TemporalAdjusters
 import java.util.Locale
@@ -59,7 +60,10 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
     private val defaultMaxHeight = 200.dp //defines max height for bars
     private var barchartInputList: MutableList<BarchartInput> = mutableListOf()
-    private var listSum = 0
+    private var description = "this week"
+    private var gap = 5
+
+    private var listMax = 0
     private var currentTimeSpan = "Week"
 
     private lateinit var inflater: LayoutInflater
@@ -128,22 +132,24 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                         val endDate = currentDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY))
 
                         allTracks = trackMasterApplication.repository.getTracksFromWeek(startDate, endDate)
-
                         getWeekInput(startDate, allTracks)
+
+                        description = "this week"
+                        gap = 5
                     }
                     "Month" -> {
                         allTracks = trackMasterApplication.repository.getTracksFromMonth(currentDate.month)
-                        for (track in allTracks) {
-                            val input = BarchartInput(track.distance, toDay(track.date))
-                            barchartInputList.add(input)
-                        }
+                        getMonthInput(currentDate, allTracks)
+
+                        description = currentDate.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
+                        gap = 1
                     }
                     "Year" -> {
                         allTracks = trackMasterApplication.repository.getTracksFromYear(currentDate.year.toString())
-                        for (track in allTracks) {
-                            val input = BarchartInput(track.distance, toDayAndMonth(track.date))
-                            barchartInputList.add(input)
-                        }
+                        getYearInput(allTracks)
+
+                        description = currentDate.year.toString()
+                        gap = 3
                     }
                 }
             }
@@ -153,8 +159,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
     @Composable
     fun BarChart(
-        inputList: List<BarchartInput>,
-        modifier: Modifier = Modifier
+        inputList: List<BarchartInput>
     ) {
 
         val borderColor = colorResource(R.color.black)
@@ -170,18 +175,18 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
-                    text = "Your Statistics",
-                    modifier = Modifier.padding(8.dp),
+                    text = "Your Statistics for " + description,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(8.dp, 8.dp, 0.dp, 0.dp),
                 )
                 DropDown()
             }
 
-
             Row(
-                modifier = modifier.then(
-                    Modifier
+                modifier = Modifier
                         .fillMaxWidth()
                         .height(defaultMaxHeight)
+                        .padding(0.dp, 16.dp, 0.dp, 0.dp)
                         .drawBehind {
                             // draw X-Axis
                             drawLine(
@@ -190,36 +195,25 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                                 end = Offset(size.width, size.height),
                                 strokeWidth = strokeWidth
                             )
-                            // draw Y-Axis
-                            drawLine(
-                                color = borderColor,
-                                start = Offset(0f, 0f),
-                                end = Offset(0f, size.height),
-                                strokeWidth = strokeWidth
-                            )
-                        }
-                ),
+                        },
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom,
             ) {
-                listSum = inputList.sumOf { it.distance }
-
+                listMax = inputList.maxWith(Comparator.comparingInt { it.distance }).distance
                 inputList.forEach { item ->
                     Bar(
-                        input = item,
+                        input = item
                     )
                 }
             }
+
             Row(
-                modifier = modifier.then(
-                    Modifier
-                        .fillMaxWidth()
-                ),
-                horizontalArrangement = Arrangement.SpaceAround
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 inputList.forEach { item ->
                     Text(
-                        text = item.dateString,
+                        text = item.dateString
                     )
                 }
             }
@@ -232,11 +226,11 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     ) {
         val color = colorResource(R.color.sky_blue)
         val value = input.distance
-        val itemHeight = remember(value) { value * (defaultMaxHeight.value - 0.5) / listSum }
+        val itemHeight = remember(value) { value * defaultMaxHeight.value / listMax }
 
         Spacer(
             modifier = Modifier
-                .padding(horizontal = 5.dp)
+                .padding(horizontal = gap.dp)
                 .height(itemHeight.dp)
                 .weight(1f)
                 .background(color)
@@ -251,7 +245,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         val currentValue = remember { mutableStateOf(list[0]) }
 
         Box {
-
             Row(
                 modifier = Modifier
                     .clickable { expanded.value = !expanded.value }
@@ -265,7 +258,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                     onDismissRequest = { expanded.value = false },
                 ) {
                     list.forEach {
-
                         DropdownMenuItem(
                             onClick = {
                                 currentValue.value = it
@@ -283,15 +275,40 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     }
 
 
-    fun getWeekInput(startDate: LocalDate, allTracks: List<Track>) {
-        for(i in 0..6) {
-            val tracksOfDay = allTracks.filter { track -> track.date == startDate.plusDays(i.toLong()) }
-            var sum = 0
-            for(trackOfDay in tracksOfDay) {
-                sum += trackOfDay.distance
-            }
-            val input = BarchartInput(sum, DayOfWeek.of(i+1).getDisplayName(TextStyle.SHORT, Locale.getDefault()))    //toDayAndMonth(startDate.plusDays(i.toLong()))
+    private fun getWeekInput(startDate: LocalDate, allTracks: List<Track>) {
+        for(i in 1..7) {
+            val tracksOfDay = allTracks.filter { track -> track.date == startDate.plusDays(i-1L) }
+            val sum = sumTracks(tracksOfDay)
+            val input = BarchartInput(sum, DayOfWeek.of(i).getDisplayName(TextStyle.SHORT, Locale.getDefault()))    //toDayAndMonth(startDate.plusDays(i.toLong()))
             barchartInputList.add(input)
         }
+    }
+
+    private fun getMonthInput(currentDate: LocalDate, allTracks: List<Track>) {
+        val length = currentDate.month.length(currentDate.isLeapYear)
+        val startDate = currentDate.withDayOfMonth(1)
+        for(i in 1..length) {
+            val tracksOfDay = allTracks.filter { track -> track.date == startDate.plusDays(i-1L) }
+            val sum = sumTracks(tracksOfDay)
+            val input = BarchartInput(sum, toDay(startDate.plusDays(i-1L))) //todo: change that bc it looks awful
+            barchartInputList.add(input)
+        }
+    }
+
+    private fun getYearInput(allTracks: List<Track>) {
+        for(i in 1..12) {
+            val tracksOfMonth = allTracks.filter { track -> track.date.month == Month.of(i)}
+            val sum = sumTracks(tracksOfMonth)
+            val input = BarchartInput(sum, Month.of(i).getDisplayName(TextStyle.SHORT, Locale.getDefault()))
+            barchartInputList.add(input)
+        }
+    }
+
+    private fun sumTracks(tracksOfDay: List<Track>): Int {
+        var sum = 0
+        for(trackOfDay in tracksOfDay) {
+            sum += trackOfDay.distance
+        }
+        return sum
     }
 }
