@@ -20,7 +20,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -36,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -61,7 +61,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     private var savedInstanceState: Bundle? = null
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -74,28 +73,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
             ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 
             update(container)
-            /*lifecycleScope.launch(Dispatchers.IO) {
-                getInput()
-
-                withContext(Dispatchers.Main) {
-                    findViewById<ComposeView>(R.id.composeView).setContent {
-                        Surface(
-                            modifier = Modifier
-                                .padding(16.dp)
-                                .fillMaxSize(),
-                            color = Color.White,
-                            shape = RoundedCornerShape(16.dp),
-                            elevation = 8.dp,
-                        ) {
-                            if (barchartInputList.isEmpty()) {
-                                Text(text = "No data, start tracking your activities.")
-                            } else {
-                                BarChart(barchartInputList)
-                            }
-                        }
-                    }
-                }
-            }*/
         }
     }
 
@@ -136,7 +113,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
             lifecycleScope.launch(Dispatchers.IO) {
 
                 barchartInputList.clear()
-                var allTracks: List<Track>
+                val allTracks: List<Track>
 
                 when (currentTimeSpan) {
                     "Week" -> allTracks = trackMasterApplication.repository.getTracksFromWeek(currentDate)
@@ -160,7 +137,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         modifier: Modifier = Modifier
     ) {
 
-        val borderColor = Color(R.color.black)
+        val borderColor = colorResource(R.color.black)
         val density = LocalDensity.current
         val strokeWidth = with(density) { 1.dp.toPx() }
 
@@ -233,7 +210,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     fun RowScope.Bar(
         input: BarchartInput
     ) {
-        val color = Color(R.color.medium_blue) //todo: change color
+        val color = colorResource(R.color.sky_blue)
         val value = input.distance
         val itemHeight = remember(value) { value * (defaultMaxHeight.value - 0.5) / listSum }
 
@@ -253,7 +230,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         val expanded = remember { mutableStateOf(false) }
         val currentValue = remember { mutableStateOf(list[0]) }
 
-        Box() {
+        Box {
 
             Row(
                 modifier = Modifier
