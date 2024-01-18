@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textSize="24sp"
-        style="@style/textHighlight"
-/>
+        style="@style/textHighlight" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fl_wrapper"
