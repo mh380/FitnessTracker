@@ -51,9 +51,12 @@
         <item name="itemTextColor">@color/D_text_white</item>
         <item name="itemIconTint">@color/D_text_white</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:checked">@color/sky_blue</item>
-
         <!-- the 3 Icons may need to be modified here -->
+    </style>
+
+    <!-- style in both modes the same -->
+    <style name= "activeIndicatorOnNavBar" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/sky_blue</item>
     </style>
 
     <!-- Floating Action button style -->

@@ -29,6 +29,7 @@
         android:layout_alignParentBottom="true"
         android:addStatesFromChildren="false"
         app:labelVisibilityMode="auto"
-        app:menu="@menu/nav_menu" />
+        app:menu="@menu/nav_menu"
+        app:itemActiveIndicatorStyle="@style/activeIndicatorOnNavBar"/>
 
 </RelativeLayout>

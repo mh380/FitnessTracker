@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/ic_tracks"
-        android:icon="@drawable/trackmaster_map_icon"
+        android:icon="@drawable/trackmaster_nav_bar_icon_tracks_2"
         android:title="@string/tracks"/>
 
     <item
         android:id="@+id/ic_settings"
-        android:icon="@drawable/baseline_settings_24"
+        android:icon="@drawable/outline_settings_24"
         android:title="@string/settings"/>
 
 </menu>
