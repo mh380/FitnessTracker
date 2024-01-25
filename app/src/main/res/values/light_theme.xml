@@ -12,12 +12,11 @@
         <item name="colorOnSecondary">@color/L_text_black</item>
         <item name="android:textColor">@color/L_text_black</item>
 
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">16sp</item>
 
         <item name="bottomNavigationStyle">@style/bottomNav</item>
         <item name="floatingActionButtonStyle">@style/floatAButton</item>
         <item name="buttonStyle">@style/playPause</item>
-        <!-- Fragment style insert -->
         <item name="switchStyle">@style/toggleButton</item>
         <item name="materialIconButtonOutlinedStyle">@style/endButton</item>
 
@@ -54,7 +53,7 @@
         <!-- the 3 Icons may need to be modified here -->
     </style>
 
-    <!-- style in both modes the same -->
+    <!-- active indicator pill shape nav bar -->
     <style name= "activeIndicatorOnNavBar" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/sky_blue</item>
     </style>
