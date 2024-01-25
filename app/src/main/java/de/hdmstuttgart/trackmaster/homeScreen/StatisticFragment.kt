@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -96,7 +97,8 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                         Surface(
                             modifier = Modifier
                                 .padding(16.dp)
-                                .fillMaxSize(),
+                                .fillMaxSize()
+                                .testTag("surface"),
                             color = Color.White,
                             shape = RoundedCornerShape(16.dp),
                             elevation = 8.dp,
@@ -175,9 +177,11 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
-                    text = "Your Statistics for " + description,
+                    text = "Your Statistics for $description",
                     fontSize = 20.sp,
-                    modifier = Modifier.padding(8.dp, 8.dp, 0.dp, 0.dp),
+                    modifier = Modifier
+                        .padding(8.dp, 8.dp, 0.dp, 0.dp)
+                        .testTag("statisticsText"),
                 )
                 DropDown()
             }
@@ -249,6 +253,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 modifier = Modifier
                     .clickable { expanded.value = !expanded.value }
                     .align(Alignment.TopEnd)
+                    .testTag("dropdown")
             ) {
                 Text(text = currentValue.value)
                 Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = null)
