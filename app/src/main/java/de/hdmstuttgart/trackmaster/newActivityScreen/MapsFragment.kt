@@ -98,6 +98,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
             googleMap.uiSettings.isRotateGesturesEnabled = true;
             googleMap.uiSettings.isRotateGesturesEnabled = true;
+            googleMap.uiSettings.isCompassEnabled = true;
+            googleMap.uiSettings.isZoomControlsEnabled = true;
 
 
 
