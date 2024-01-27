@@ -23,7 +23,7 @@ class LocationService: Service() {
     private lateinit var locationClient: LocationClient
     override fun onBind(p0: Intent?): IBinder? {
         return null
-        }
+    }
 
     override fun onCreate() {
         super.onCreate()

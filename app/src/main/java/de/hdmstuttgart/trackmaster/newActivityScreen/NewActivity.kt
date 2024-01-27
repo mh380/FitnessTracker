@@ -16,6 +16,7 @@ class NewActivity : AppCompatActivity() {
 
         val startButton: Button = findViewById(R.id.buttonStart)
         val stopButton: Button = findViewById(R.id.buttonStop)
+        val endButton: Button = findViewById(R.id.endButton)
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -32,12 +33,16 @@ class NewActivity : AppCompatActivity() {
             }
 
             stopButton.setOnClickListener {
-                // Starten Sie den LocationService mit der Aktion ACTION_STOP
+                // Stoppen Sie den LocationService mit der Aktion ACTION_STOP
                 Intent(applicationContext, LocationService::class.java).apply {
                     action = LocationService.ACTION_STOP
                 }.also {
                     startService(it)
                 }
+            }
+
+            endButton.setOnClickListener{
+                finish()
             }
         }
     }

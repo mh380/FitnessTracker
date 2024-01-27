@@ -16,5 +16,8 @@
     <string name="max_distance">Longest Distance:</string>
     <string name="max_time">Longest Time:</string>
     <string name="max_pace">Highest Pace:</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="end_tracking">End tracking</string>
 
 </resources>

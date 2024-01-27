@@ -19,7 +19,7 @@
         android:name="de.hdmstuttgart.trackmaster.newActivityScreen.MapsFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +28,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="00:00:00:00"
             android:textSize="50sp"
-            app:layout_constraintBottom_toTopOf="@+id/buttonStart"
+            app:layout_constraintBottom_toTopOf="@id/buttonStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,11 +49,11 @@
             android:id="@+id/buttonStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCentered"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/start"
+            app:layout_constraintTop_toBottomOf="@id/textViewCentered"
+            app:layout_constraintBottom_toTopOf="@id/endButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonStop"
+            app:layout_constraintEnd_toStartOf="@id/buttonStop"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintVertical_bias="0.5" />
 
@@ -61,13 +61,25 @@
             android:id="@+id/buttonStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Stop"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCentered"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/buttonStart"
+            android:text="@string/stop"
+            app:layout_constraintTop_toBottomOf="@id/textViewCentered"
+            app:layout_constraintBottom_toTopOf="@id/endButton"
+            app:layout_constraintStart_toEndOf="@id/buttonStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.5" />
+
+        <Button
+            android:id="@+id/endButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_tracking"
+            app:layout_constraintTop_toBottomOf="@id/buttonStop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
