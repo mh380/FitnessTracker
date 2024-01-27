@@ -45,7 +45,7 @@ class LocationService: Service() {
         val Notification = NotificationCompat.Builder(this, "location")
             .setContentTitle("TrackMaster")
             .setContentText("Tracking your location")
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.drawable.trackmasterlogo_dunkelblau)
             .setOngoing(true)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
