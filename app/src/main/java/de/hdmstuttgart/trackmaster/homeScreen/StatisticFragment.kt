@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,9 +18,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Colors
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -41,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.common.SignInButton.ColorScheme
 import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.TrackMasterApplication
 import de.hdmstuttgart.trackmaster.data.BarchartInput
@@ -99,7 +103,8 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                                 .padding(16.dp)
                                 .fillMaxSize()
                                 .testTag("surface"),
-                            color = Color.White,
+                            //color = Color.White,
+                            color = MaterialTheme.colors.viewBackgroundColor,
                             shape = RoundedCornerShape(16.dp),
                             elevation = 8.dp,
                         ) {
@@ -158,7 +163,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         }
     }
 
-// I tried
+
     @Composable
     fun BarChart(
         inputList: List<BarchartInput>
@@ -279,7 +284,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         }
     }
 
-
     private fun getWeekInput(startDate: LocalDate, allTracks: List<Track>) {
         for(i in 1..7) {
             val tracksOfDay = allTracks.filter { track -> track.date == startDate.plusDays(i-1L) }
@@ -316,4 +320,15 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         }
         return sum
     }
+
+
+
+
+    val Colors.viewBackgroundColor: Color
+        @Composable
+        get() = if (isSystemInDarkTheme()) Color(0xFFFAFAFA) else Color(0xFF2a4671)
+
+
+// 0xFFFAFAFA
+
 }

@@ -12,6 +12,7 @@
         <item name="colorOnSecondary">@color/L_text_black</item>
         <item name="android:textColor">@color/D_text_white</item>
 
+
         <item name="android:textSize">16sp</item>
 
         <item name="bottomNavigationStyle">@style/bottomNav</item>
@@ -23,6 +24,7 @@
 
 
     </style>
+
 
     <!-- overall background sceen color, added to the parent layout element -->
     <style name="screenBackground" >
