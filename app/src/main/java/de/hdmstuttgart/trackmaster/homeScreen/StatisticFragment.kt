@@ -158,7 +158,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         }
     }
 
-
+// I tried
     @Composable
     fun BarChart(
         inputList: List<BarchartInput>
