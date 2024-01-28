@@ -103,7 +103,6 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                                 .padding(16.dp)
                                 .fillMaxSize()
                                 .testTag("surface"),
-                            //color = Color.White,
                             color = MaterialTheme.colors.viewBackgroundColor,
                             shape = RoundedCornerShape(16.dp),
                             elevation = 8.dp,
@@ -184,6 +183,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 Text(
                     text = "Your Statistics for $description",
                     fontSize = 20.sp,
+                    color = MaterialTheme.colors.viewTextColor,
                     modifier = Modifier
                         .padding(8.dp, 8.dp, 0.dp, 0.dp)
                         .testTag("statisticsText"),
@@ -222,6 +222,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
             ) {
                 inputList.forEach { item ->
                     Text(
+                        color = MaterialTheme.colors.viewTextColor,
                         text = item.dateString
                     )
                 }
@@ -322,13 +323,16 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     }
 
 
-
-
-    val Colors.viewBackgroundColor: Color
+// Color composable contains colors that change with the light/dark theme.
+// Colors are built up in sRGB format by adding: 0xFF + Hex code of the color in the color xml file
+    // background color for the views, Light mode "L_background_white", dark mode "D_Secondary_Blue"
+   private val Colors.viewBackgroundColor: Color
         @Composable
-        get() = if (isSystemInDarkTheme()) Color(0xFFFAFAFA) else Color(0xFF2a4671)
+        get() = if (!isSystemInDarkTheme()) Color(0xFFFAFAFA) else Color(0xFF2a4671)
+    private val Colors.viewTextColor: Color
+        @Composable
+        get() = if (!isSystemInDarkTheme()) Color(0xFF505050) else Color(0xFFDEEDF8)
 
 
-// 0xFFFAFAFA
 
 }
