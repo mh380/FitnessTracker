@@ -301,7 +301,13 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         for(i in 1..length) {
             val tracksOfDay = allTracks.filter { track -> track.date == startDate.plusDays(i-1L) }
             val sum = sumTracks(tracksOfDay)
-            val input = BarchartInput(sum, toDay(startDate.plusDays(i-1L))) //todo: change that bc it looks awful
+            val dateString: String
+            if(i==1 || i==5 || i==10 || i==15 || i==20 || i==25 || i==length) {
+                dateString = toDay(startDate.plusDays(i-1L))
+            } else {
+                dateString = ""
+            }
+            val input = BarchartInput(sum, dateString)
             barchartInputList.add(input)
         }
     }
@@ -331,5 +337,4 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     private val Colors.viewTextColor: Color
         @Composable
         get() = if (!isSystemInDarkTheme()) colorResource(R.color.L_text_black) else colorResource(R.color.D_text_white)
-
 }
