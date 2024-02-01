@@ -35,7 +35,11 @@ class MainActivity : AppCompatActivity() {
             trackMasterApplication.repository.insert(Track(distance = 2, time = 20))
             trackMasterApplication.repository.insert(Track(distance = 5, time = 45))
             trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(1), distance = 12, time = 25))
-            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(10), distance = 12, time = 25))
+            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(2), distance = 4, time = 15))
+            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(3), distance = 5, time = 17))
+            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(4), distance = 10, time = 21))
+            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(5), distance = 13, time = 28))
+            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(10), distance = 8, time = 20))
             trackMasterApplication.repository.insert(Track(date = LocalDate.parse("2024-02-15"), distance = 15, time = 30))
         }
 
