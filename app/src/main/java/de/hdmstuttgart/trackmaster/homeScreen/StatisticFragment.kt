@@ -315,7 +315,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         }
     }
 
-    private fun sumTracks(tracksOfDay: List<Track>): Int {
+    fun sumTracks(tracksOfDay: List<Track>): Int {
         var sum = 0
         for(trackOfDay in tracksOfDay) {
             sum += trackOfDay.distance

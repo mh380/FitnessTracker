@@ -17,7 +17,7 @@ import java.time.LocalDate
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //beim Start der App den richtigen Mode anwenden
+        //using correct mode when app is started
         val sharedPreferences = getPreferences(MODE_PRIVATE)
         when (sharedPreferences.getBoolean("darkTheme", false)) {
             true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //todo: remove test tracks //todo: inserting a track into the database has to happen whenever tracking is stopped
+        //todo: remove test tracks
+        //todo: inserting a track into the database has to happen whenever tracking is stopped
         val trackMasterApplication = this.application as TrackMasterApplication
         lifecycleScope.launch(Dispatchers.IO) {
             trackMasterApplication.repository.deleteAll()
