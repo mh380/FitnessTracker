@@ -18,9 +18,6 @@ import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.time.LocalDate
-import java.time.format.TextStyle
-import java.util.Locale
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -60,8 +57,11 @@ class TrackMasterApplicationTest {
         onView(withId(R.id.fragment_container))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
-        //todo: check if activity closes
+        onView(withId(R.id.endButton))
+            .perform(click())
 
+        onView(withId(R.id.fl_wrapper))
+            .check((ViewAssertions.matches(ViewMatchers.isDisplayed())))
 
         activityScenarioRule.scenario.close()
     }
@@ -122,10 +122,8 @@ class TrackMasterApplicationTest {
             .assertExists()
             .performClick()
 
-        val monthText = "Your statistics for " + LocalDate.now().month.getDisplayName(TextStyle.FULL, Locale.getDefault())
         composeTestRule.onNodeWithTag("statisticsText")
             .assertExists()
-            //.assert(hasText("Your statistics for January"))
 
         composeTestRule.onNodeWithTag("dropdown")
             .assertExists()
