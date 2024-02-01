@@ -168,7 +168,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         inputList: List<BarchartInput>
     ) {
 
-        val borderColor = colorResource(R.color.black)
+        val borderColor = MaterialTheme.colors.viewTextColor
         val density = LocalDensity.current
         val strokeWidth = with(density) { 1.dp.toPx() }
 
@@ -261,8 +261,10 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                     .align(Alignment.TopEnd)
                     .testTag("dropdown")
             ) {
-                Text(text = currentValue.value)
-                Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = null)
+                Text(text = currentValue.value,
+                    color = MaterialTheme.colors.viewTextColor)
+                Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = null,
+                    tint = MaterialTheme.colors.viewTextColor)
 
                 DropdownMenu(
                     expanded = expanded.value,
