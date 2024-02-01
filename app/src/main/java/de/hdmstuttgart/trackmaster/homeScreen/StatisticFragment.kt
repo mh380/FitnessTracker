@@ -44,7 +44,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.common.SignInButton.ColorScheme
 import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.TrackMasterApplication
 import de.hdmstuttgart.trackmaster.data.BarchartInput
@@ -193,18 +192,18 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
 
             Row(
                 modifier = Modifier
-                        .fillMaxWidth()
-                        .height(defaultMaxHeight)
-                        .padding(0.dp, 16.dp, 0.dp, 0.dp)
-                        .drawBehind {
-                            // draw X-Axis
-                            drawLine(
-                                color = borderColor,
-                                start = Offset(0f, size.height),
-                                end = Offset(size.width, size.height),
-                                strokeWidth = strokeWidth
-                            )
-                        },
+                    .fillMaxWidth()
+                    .height(defaultMaxHeight)
+                    .padding(0.dp, 16.dp, 0.dp, 0.dp)
+                    .drawBehind {
+                        // draw X-Axis
+                        drawLine(
+                            color = borderColor,
+                            start = Offset(0f, size.height),
+                            end = Offset(size.width, size.height),
+                            strokeWidth = strokeWidth
+                        )
+                    },
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom,
             ) {
@@ -325,16 +324,12 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     }
 
 
-// Color composable contains colors that change with the light/dark theme.
-// Colors are built up in sRGB format by adding: 0xFF + Hex code of the color in the color xml file
-    // background color for the views, Light mode "L_background_white", dark mode "D_Secondary_Blue"
+    // Color composable contains colors that change with the light/dark theme.
    private val Colors.viewBackgroundColor: Color
         @Composable
-        get() = if (!isSystemInDarkTheme()) Color(0xFFFAFAFA) else Color(0xFF2a4671)
+        get() = if (!isSystemInDarkTheme()) colorResource(R.color.L_background_white) else colorResource(R.color.D_secondary_blue)
     private val Colors.viewTextColor: Color
         @Composable
-        get() = if (!isSystemInDarkTheme()) Color(0xFF505050) else Color(0xFFDEEDF8)
-
-
+        get() = if (!isSystemInDarkTheme()) colorResource(R.color.L_text_black) else colorResource(R.color.D_text_white)
 
 }
