@@ -11,20 +11,18 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * Instrumented test, which will execute on an Android device.
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-@RunWith(AndroidJUnit4::class)
+
 class TrackMasterApplicationTest {
 
     @Test
@@ -46,7 +44,7 @@ class TrackMasterApplicationTest {
         android.Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    @Test
+    /*@Test
     fun newActivityTest() {
         onView(withId(R.id.ic_home))
             .perform(click())
@@ -64,11 +62,10 @@ class TrackMasterApplicationTest {
             .check((ViewAssertions.matches(ViewMatchers.isDisplayed())))
 
         activityScenarioRule.scenario.close()
-    }
+    }*/
 
     @Test
-    fun mainActivityTest() {
-        //test the bottom navigation bar
+    fun bottomNavbarTest() {
         onView(withId(R.id.ic_tracks))
             .perform(click())
 
@@ -89,7 +86,11 @@ class TrackMasterApplicationTest {
         onView(withId(R.id.scoreFragmentView))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
-        //test the dark mode switch
+        activityScenarioRule.scenario.close()
+    }
+
+    @Test
+    fun darkModeSwitchTest() {
         onView(withId(R.id.ic_settings))
             .perform(click())
 

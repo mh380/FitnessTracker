@@ -67,7 +67,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
     private var description = "this week"
     private var gap = 5
 
-    private var listMax = 0
+    private var listMax = 0f
     private var currentTimeSpan = "Week"
 
     private lateinit var inflater: LayoutInflater
@@ -207,7 +207,7 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom,
             ) {
-                listMax = inputList.maxWith(Comparator.comparingInt { it.distance }).distance
+                listMax = inputList.maxWith(compareBy { it.distance }).distance
                 inputList.forEach { item ->
                     Bar(
                         input = item
@@ -321,10 +321,10 @@ class StatisticFragment : Fragment(R.layout.fragment_statistic) {
         }
     }
 
-    fun sumTracks(tracksOfDay: List<Track>): Int {
-        var sum = 0
+    fun sumTracks(tracksOfDay: List<Track>): Float {
+        var sum = 0f
         for(trackOfDay in tracksOfDay) {
-            sum += trackOfDay.distance
+            sum += trackOfDay.distanceInMeters
         }
         return sum
     }

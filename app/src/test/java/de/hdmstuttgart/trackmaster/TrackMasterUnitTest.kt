@@ -19,11 +19,11 @@ import java.time.LocalDate
 class TrackMasterUnitTest {
 
     private val statisticFragment = StatisticFragment()
-    private val trackList = listOf(Track(distance = 2, time = 20), Track(distance = 5, time = 45), Track(distance = 12, time = 25))
+    private val trackList = listOf(Track(distanceInMeters = 2f, timeInMillis = 20), Track(distanceInMeters = 5f, timeInMillis = 45), Track(distanceInMeters = 12f, timeInMillis = 25))
 
     @Test
     fun testSumTracks() {
-        assertEquals(19, statisticFragment.sumTracks(trackList))
+        assertEquals(19f, statisticFragment.sumTracks(trackList))
     }
 
     @Test
