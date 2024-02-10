@@ -81,8 +81,9 @@ class TrackingService : LifecycleService() {
             when(it.action) {
                 ACTION_START_OR_RESUME_SERVICE -> {
                     if(isFirstRun) {
-                        isFirstRun = false
                         startForegroundService()
+                        isFirstRun = false
+
                     } else {
                         Log.d("TrackingService", "Resumed service")
                         startTimer()

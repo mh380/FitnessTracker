@@ -1,8 +1,10 @@
 package de.hdmstuttgart.trackmaster.newActivityScreen
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,9 +30,11 @@ import de.hdmstuttgart.trackmaster.data.Track
 import de.hdmstuttgart.trackmaster.services.TrackingService
 import de.hdmstuttgart.trackmaster.utils.Constants
 import de.hdmstuttgart.trackmaster.utils.Constants.ACTION_STOP_SERVICE
+import de.hdmstuttgart.trackmaster.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import de.hdmstuttgart.trackmaster.utils.TrackingUtility
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 
 class TrackingFragment : Fragment() {
@@ -98,6 +102,35 @@ class TrackingFragment : Fragment() {
             FINE_LOCATION_PERMISSION_CODE
         )
     }
+
+    private fun requestPermissions() {
+        if (TrackingUtility.hasLocationPermissions(requireContext())) {
+            return
+        }
+
+        val permissions = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        } else {
+            arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            )
+        }
+
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            permissions,
+            REQUEST_CODE_LOCATION_PERMISSION
+        )
+    }
+
+
+
+
 
     // new code
     private fun subscribeToObservers() {
@@ -212,6 +245,8 @@ class TrackingFragment : Fragment() {
                 .addAll(polyline)
             map?.addPolyline(polylineOptions)
         }
+
+
     }
 
     private fun addLatestPolyline() {
