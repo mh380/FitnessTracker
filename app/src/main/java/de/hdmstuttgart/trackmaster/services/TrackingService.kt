@@ -51,6 +51,7 @@ class TrackingService : LifecycleService() {
     //Implementing the Stop Watch
     private val timeRunInSeconds = MutableLiveData<Long>()
 
+
     //Whenever the tracking state changes post the new value inside isTracking
     companion object {
         val timeRunInMillis = MutableLiveData<Long>()
@@ -81,6 +82,7 @@ class TrackingService : LifecycleService() {
                 ACTION_START_OR_RESUME_SERVICE -> {
                     if(isFirstRun) {
                         isFirstRun = false
+                        startForegroundService()
                     } else {
                         Log.d("TrackingService", "Resumed service")
                         startTimer()
@@ -158,6 +160,7 @@ class TrackingService : LifecycleService() {
             fusedLocationProviderClient.removeLocationUpdates(locationCallback)
         }
     }
+
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(p0: LocationResult) {
             super.onLocationResult(p0)
@@ -188,5 +191,10 @@ class TrackingService : LifecycleService() {
     } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
 
 
+    private fun startForegroundService() {
+        startTimer()
+        isTracking.postValue(true)
+        addEmptyPolyline()
+    }
 }
 
