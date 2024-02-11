@@ -24,6 +24,7 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.material.snackbar.Snackbar
 import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.TrackMasterApplication
 import de.hdmstuttgart.trackmaster.data.Track
@@ -40,7 +41,7 @@ import kotlinx.coroutines.launch
 class TrackingFragment : Fragment() {
 
     private val FINE_LOCATION_PERMISSION_CODE = 1
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
     private var isTracking = false
     private var pathPoints = mutableListOf<MutableList<LatLng>>()
@@ -58,13 +59,8 @@ class TrackingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        if (checkLocationPermission()) {
-            //todo
-        } else {
-            requestLocationPermission()
-        }
+
 
         mapView = view.findViewById(R.id.mapView)
 
@@ -87,50 +83,6 @@ class TrackingFragment : Fragment() {
 
         subscribeToObservers()
     }
-
-    private fun checkLocationPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireContext(),
-            android.Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun requestLocationPermission() {
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-            FINE_LOCATION_PERMISSION_CODE
-        )
-    }
-
-    private fun requestPermissions() {
-        if (TrackingUtility.hasLocationPermissions(requireContext())) {
-            return
-        }
-
-        val permissions = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-        } else {
-            arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-            )
-        }
-
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            permissions,
-            REQUEST_CODE_LOCATION_PERMISSION
-        )
-    }
-
-
-
-
 
     // new code
     private fun subscribeToObservers() {
@@ -228,11 +180,6 @@ class TrackingFragment : Fragment() {
                     trackMasterApplication.repository.insert(run)
                 }
             }
-            /*Snackbar.make(
-                requireActivity().findViewById(R.id.rootView),
-                "Run saved successfully",
-                Snackbar.LENGTH_LONG
-            ).show()*/ //todo: fix this, if we really want it
             stopRun()
         }
     }

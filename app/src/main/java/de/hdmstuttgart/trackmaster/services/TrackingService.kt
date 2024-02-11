@@ -41,7 +41,7 @@ import kotlinx.coroutines.launch
 typealias Polyline = MutableList<LatLng>
 typealias Polylines = MutableList<Polyline>
 
-//@AndroidEntryPoint
+
 class TrackingService : LifecycleService() {
 
     private var isFirstRun = true
