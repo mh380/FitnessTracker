@@ -30,16 +30,69 @@ class MainActivity : AppCompatActivity() {
         //example data for demonstration purpose
         val trackMasterApplication = this.application as TrackMasterApplication
         lifecycleScope.launch(Dispatchers.IO) {
-            trackMasterApplication.repository.deleteAll()
-            trackMasterApplication.repository.insert(Track(distanceInMeters = 2000.7f, timeInMillis = 1200000L))
-            trackMasterApplication.repository.insert(Track(distanceInMeters = 5000f, timeInMillis = 2700000L))
-            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(1), distanceInMeters = 12000f, timeInMillis = 1500000L))
-            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(2), distanceInMeters = 4000f, timeInMillis = 900000L))
-            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(3), distanceInMeters = 5000f, timeInMillis = 1020000L))
-            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(4), distanceInMeters = 10000f, timeInMillis = 1260000L))
-            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(5), distanceInMeters = 13000f, timeInMillis = 1680000L))
-            trackMasterApplication.repository.insert(Track(date = LocalDate.now().minusDays(10), distanceInMeters = 8000f, timeInMillis = 1200000L))
-            trackMasterApplication.repository.insert(Track(date = LocalDate.parse("2024-02-15"), distanceInMeters = 15000f, timeInMillis = 1800000L))
+            if (trackMasterApplication.repository.getAllTracksOrderedByDate().isEmpty()) { //only inserted if repository is empty
+                trackMasterApplication.repository.insert(
+                    Track(
+                        distanceInMeters = 2000.7f,
+                        timeInMillis = 1200000L
+                    )
+                )
+                trackMasterApplication.repository.insert(
+                    Track(
+                        distanceInMeters = 5000f,
+                        timeInMillis = 2700000L
+                    )
+                )
+                trackMasterApplication.repository.insert(
+                    Track(
+                        date = LocalDate.now().minusDays(1),
+                        distanceInMeters = 12000f,
+                        timeInMillis = 1500000L
+                    )
+                )
+                trackMasterApplication.repository.insert(
+                    Track(
+                        date = LocalDate.now().minusDays(2),
+                        distanceInMeters = 4000f,
+                        timeInMillis = 900000L
+                    )
+                )
+                trackMasterApplication.repository.insert(
+                    Track(
+                        date = LocalDate.now().minusDays(3),
+                        distanceInMeters = 5000f,
+                        timeInMillis = 1020000L
+                    )
+                )
+                trackMasterApplication.repository.insert(
+                    Track(
+                        date = LocalDate.now().minusDays(4),
+                        distanceInMeters = 10000f,
+                        timeInMillis = 1260000L
+                    )
+                )
+                trackMasterApplication.repository.insert(
+                    Track(
+                        date = LocalDate.now().minusDays(5),
+                        distanceInMeters = 13000f,
+                        timeInMillis = 1680000L
+                    )
+                )
+                trackMasterApplication.repository.insert(
+                    Track(
+                        date = LocalDate.now().minusDays(10),
+                        distanceInMeters = 8000f,
+                        timeInMillis = 1200000L
+                    )
+                )
+                trackMasterApplication.repository.insert(
+                    Track(
+                        date = LocalDate.parse("2024-02-15"),
+                        distanceInMeters = 15000f,
+                        timeInMillis = 1800000L
+                    )
+                )
+            }
         }
 
 
@@ -47,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         val tracksFragment = TrackFragment()
         val settingsFragment = SettingsFragment()
 
-        if(sharedPreferences.getBoolean("settings", false)) {
+        if (sharedPreferences.getBoolean("settings", false)) {
             makeCurrentFragment(settingsFragment)
             sharedPreferences.edit().putBoolean("settings", false).apply()
         } else {
