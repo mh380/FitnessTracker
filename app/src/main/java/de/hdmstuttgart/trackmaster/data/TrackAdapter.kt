@@ -22,7 +22,7 @@ class TrackAdapter(private val list: List<Track>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val trackModel = list[position]
-        val time = round(trackModel.timeInMillis / 60000f)
+        val time = round(trackModel.timeInMillis / 6000.0) / 10
 
         holder.dateView.text = ("Date: " + toGermanDate(trackModel.date))
         holder.distanceView.text = ("Distance: " + trackModel.distanceInMeters / 1000 + " km")
