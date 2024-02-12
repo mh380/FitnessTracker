@@ -29,6 +29,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnToggleRun"
+            style="Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/start"
@@ -44,11 +45,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/finish_run"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:backgroundTint="@color/L_background_white"
+            app:cornerRadius="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnToggleRun"
-            app:layout_constraintTop_toBottomOf="@+id/tvTimer" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTimer"
+            app:strokeWidth="2dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
