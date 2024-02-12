@@ -56,7 +56,6 @@ class TrackingFragment : Fragment() {
         }
         val btnFinishRun = requireView().findViewById<Button>(R.id.btnFinishRun)
         btnFinishRun.setOnClickListener {
-            zoomToSeeWholeTrack()
             endRunAndSaveToDB()
         }
 
@@ -129,28 +128,9 @@ class TrackingFragment : Fragment() {
         }
     }
 
-    private fun zoomToSeeWholeTrack() {
-        val bounds = LatLngBounds.Builder()
-        for (polyline in pathPoints) {
-            for (pos in polyline) {
-                bounds.include(pos)
-            }
-        }
 
-        // vielleicht unnötig //todo: kann man das löschen?
-        //Screenshot machen
-        map?.moveCamera(
-            CameraUpdateFactory.newLatLngBounds(
-                bounds.build(),
-                mapView.width,
-                mapView.height,
-                (mapView.height * 0.05f).toInt()
-            )
-        )
-    }
 
     private fun endRunAndSaveToDB() {
-        map?.snapshot { bmp ->
             var distanceInMeters = 0f
             for (polyline in pathPoints) {
                 distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
@@ -164,7 +144,7 @@ class TrackingFragment : Fragment() {
                 }
             }
             stopRun()
-        }
+
     }
 
     private fun addAllPolylines() {
