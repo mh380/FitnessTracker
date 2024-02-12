@@ -33,47 +33,49 @@ class MainActivity : AppCompatActivity() {
             if (trackMasterApplication.repository.getAllTracksOrderedByDate().isEmpty()) { //only inserted if repository is empty
                 trackMasterApplication.repository.insert(
                     Track(
+                        date = LocalDate.now().minusDays(1),
                         distanceInMeters = 2000.7f,
                         timeInMillis = 1200000L
                     )
                 )
                 trackMasterApplication.repository.insert(
                     Track(
+                        date = LocalDate.now().minusDays(1),
                         distanceInMeters = 5000f,
                         timeInMillis = 2700000L
                     )
                 )
                 trackMasterApplication.repository.insert(
                     Track(
-                        date = LocalDate.now().minusDays(1),
+                        date = LocalDate.now().minusDays(2),
                         distanceInMeters = 12000f,
                         timeInMillis = 1500000L
                     )
                 )
                 trackMasterApplication.repository.insert(
                     Track(
-                        date = LocalDate.now().minusDays(2),
+                        date = LocalDate.now().minusDays(3),
                         distanceInMeters = 4000f,
                         timeInMillis = 900000L
                     )
                 )
                 trackMasterApplication.repository.insert(
                     Track(
-                        date = LocalDate.now().minusDays(3),
+                        date = LocalDate.now().minusDays(4),
                         distanceInMeters = 5000f,
                         timeInMillis = 1020000L
                     )
                 )
                 trackMasterApplication.repository.insert(
                     Track(
-                        date = LocalDate.now().minusDays(4),
+                        date = LocalDate.now().minusDays(5),
                         distanceInMeters = 10000f,
                         timeInMillis = 1260000L
                     )
                 )
                 trackMasterApplication.repository.insert(
                     Track(
-                        date = LocalDate.now().minusDays(5),
+                        date = LocalDate.now().minusDays(6),
                         distanceInMeters = 13000f,
                         timeInMillis = 1680000L
                     )
