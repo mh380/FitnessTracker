@@ -19,9 +19,6 @@
         <item name="buttonStyle">@style/playPause</item>
         <item name="switchStyle">@style/toggleButton</item>
         <item name="materialIconButtonOutlinedStyle">@style/endButton</item>
-
-
-
     </style>
 
     <style name="screenBackground" >
@@ -63,15 +60,6 @@
         <item name="backgroundTint">@color/medium_blue</item>
         <item name="android:textAppearanceButton">@color/D_text_white</item>
         <item name="android:colorActivatedHighlight">@color/sky_blue</item>
-        <!-- icon size -->
-        <!-- drop shadow color? -->
-    </style>
-
-    <!-- Statistic cards -->
-    <style name="statisticsFrag" parent="Widget.Material3.CardView.Elevated">
-        <!-- todo: the fragment itself must contain the style elements:
-         shadow
-         corner radius -->
     </style>
 
     <!-- Play/Pause Button -->
@@ -82,32 +70,17 @@
 
     <!--end session button -->
     <style name="endButton" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="android:background">@color/L_background_white</item>
-        <item name="android:color">@color/medium_blue</item>
+        <item name="android:backgroundTint">@color/L_background_white</item>
         <item name="android:textColor">@color/medium_blue</item>
         <item name="android:colorControlActivated">@color/L_light_blue</item>
+        <item name="android:strokeColor">@color/medium_blue</item>
+        <item name="android:strokeWidth">4</item>
     </style>
-
-    <!--  todo: track view fragment style
-    <style name="" parent="">
-        <item name="">@color/D_secondary_black</item>
-        <item name="android:textColor">@color/D_text_white</item>
-         dark blue highlighted headline text color
-         <item name="">@color/L_dark_blue</item>
-    </style> -->
-
 
     <!-- settings toggle -->
     <style name="toggleButton" parent="Widget.Material3.CompoundButton.MaterialSwitch">
         <item name="trackTint">@color/L_light_blue</item>
         <item name="thumbTint">@color/medium_blue</item>
     </style>
-
-
-    <!-- todo: Map color change? dark mode may be exclusive to google maps -->
-
-
-
-
 
 </resources>

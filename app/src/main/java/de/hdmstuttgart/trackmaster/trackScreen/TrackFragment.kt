@@ -39,7 +39,7 @@ class TrackFragment : Fragment(R.layout.fragment_tracks), TrackClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
 
                 data.clear()
-                data.addAll(trackMasterApplication.repository.getAllTracks())
+                data.addAll(trackMasterApplication.repository.getAllTracksOrderedByDate())
 
                 withContext(Dispatchers.Main) {
                     adapter.notifyDataSetChanged()

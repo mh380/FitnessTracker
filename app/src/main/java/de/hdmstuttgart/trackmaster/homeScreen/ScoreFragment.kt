@@ -7,16 +7,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.TrackMasterApplication
-import de.hdmstuttgart.trackmaster.data.Track
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ScoreFragment : Fragment (R.layout.fragment_score) {
 
-    private var maxDistance = 0
-    private var maxTime = 0
-    private var maxPace = 0.0f
+    private var maxDistance = 0f
+    private var maxTime = 0L
+    private var maxPace = 0f
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,8 +31,8 @@ class ScoreFragment : Fragment (R.layout.fragment_score) {
 
             lifecycleScope.launch(Dispatchers.IO) {
 
-                maxDistance = trackMasterApplication.repository.getMaxDistance()
-                maxTime = trackMasterApplication.repository.getMaxTime()
+                maxDistance = trackMasterApplication.repository.getMaxDistance() / 1000
+                maxTime = trackMasterApplication.repository.getMaxTime() / 60000
                 maxPace = trackMasterApplication.repository.getMaxPace()
 
                 val maxDistanceView = view.findViewById<TextView>(R.id.maxDistance)
@@ -43,7 +42,7 @@ class ScoreFragment : Fragment (R.layout.fragment_score) {
                 withContext(Dispatchers.Main) {
                     maxDistanceView.append("\n" + maxDistance + " km")
                     maxTimeView.append("\n" + maxTime + " minutes")
-                    maxPaceView.append("\n" + maxPace + " km/minute")
+                    maxPaceView.append("\n" + maxPace + " km/h")
                 }
             }
         }
