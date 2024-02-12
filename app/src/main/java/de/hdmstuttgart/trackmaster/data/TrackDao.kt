@@ -4,32 +4,29 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import java.time.LocalDate
 
 @Dao
 interface TrackDao {
-    //dao = database access object
 
-    @Query("SELECT * FROM track")
-    fun getAllTracks(): List<Track>
+    @Query("SELECT * FROM running_table ORDER BY date DESC")
+    fun getAllTracksOrderedByDate(): List<Track>
 
-    @Query("SELECT * FROM track WHERE date BETWEEN :startDate AND :endDate ORDER BY DATE")
+    @Query("SELECT * FROM running_table WHERE date BETWEEN :startDate AND :endDate ORDER BY date")
     fun getTracksFromWeek(startDate: String, endDate: String): List<Track>
 
-    //@Query("SELECT * FROM track WHERE substr(date, 6, 2)=:month")
-    @Query("SELECT * FROM track WHERE substr(date, 6, 2) = :month ORDER BY date")
+    @Query("SELECT * FROM running_table WHERE substr(date, 6, 2) = :month ORDER BY date")
     fun getTracksFromMonth(month: String): List<Track>
 
-    @Query("SELECT * FROM track WHERE substr(date, 1, 4) = :year ORDER BY date")
+    @Query("SELECT * FROM running_table WHERE substr(date, 1, 4) = :year ORDER BY date")
     fun getTracksFromYear(year: String): List<Track>
 
-    @Query("SELECT MAX (distance) FROM track")
-    fun getMaxDistance(): Int
+    @Query("SELECT MAX (distanceInMeters) FROM running_table")
+    fun getMaxDistance(): Float
 
-    @Query("SELECT MAX (time) FROM track")
-    fun getMaxTime(): Int
+    @Query("SELECT MAX (timeInMillis) FROM running_table")
+    fun getMaxTime(): Long
 
-    @Query("SELECT MAX (pace) FROM track")
+    @Query("SELECT MAX (avgSpeedInKMH) FROM running_table")
     fun getMaxPace(): Float
 
     @Insert
@@ -38,6 +35,6 @@ interface TrackDao {
     @Delete
     suspend fun delete(track: Track)
 
-    @Query("DELETE FROM track")
+    @Query("DELETE FROM running_table")
     suspend fun deleteAll()
 }

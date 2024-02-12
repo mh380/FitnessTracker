@@ -1,15 +1,13 @@
 package de.hdmstuttgart.trackmaster.data
 
 import androidx.annotation.WorkerThread
-import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
-import java.time.temporal.TemporalAdjusters
 
 class TrackRepository(private val trackDao: TrackDao) {
 
-    fun getAllTracks(): List<Track> {
-        return trackDao.getAllTracks()
+    fun getAllTracksOrderedByDate(): List<Track> {
+        return trackDao.getAllTracksOrderedByDate()
     }
 
     fun getTracksFromWeek(startDate: LocalDate, endDate: LocalDate): List<Track> {
@@ -32,11 +30,11 @@ class TrackRepository(private val trackDao: TrackDao) {
         return trackDao.getTracksFromYear(targetYear)
     }
 
-    fun getMaxDistance(): Int {
+    fun getMaxDistance(): Float {
         return trackDao.getMaxDistance()
     }
 
-    fun getMaxTime(): Int {
+    fun getMaxTime(): Long {
         return trackDao.getMaxTime()
     }
 
@@ -47,11 +45,6 @@ class TrackRepository(private val trackDao: TrackDao) {
     @WorkerThread
     suspend fun insert(track: Track) {
         trackDao.insert(track)
-    }
-
-    @WorkerThread
-    suspend fun delete(track: Track) {
-        trackDao.delete(track)
     }
 
     @WorkerThread
