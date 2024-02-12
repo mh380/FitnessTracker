@@ -44,7 +44,7 @@ class TrackMasterApplicationTest {
         android.Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    /*@Test
+   /* @Test //todo: not working because button not visible from the beginning
     fun newActivityTest() {
         onView(withId(R.id.ic_home))
             .perform(click())
@@ -55,7 +55,12 @@ class TrackMasterApplicationTest {
         onView(withId(R.id.fragment_container))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
-        onView(withId(R.id.endButton))
+        onView(withId(R.id.btnToggleRun))
+            .perform(click())
+        onView(withId(R.id.btnToggleRun))
+            .perform(click())
+
+        onView(withId(R.id.btnFinishRun))
             .perform(click())
 
         onView(withId(R.id.fl_wrapper))
