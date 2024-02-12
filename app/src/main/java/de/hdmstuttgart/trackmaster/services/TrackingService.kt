@@ -146,17 +146,19 @@ class TrackingService : LifecycleService() {
 
     @SuppressLint("MissingPermission")
     private fun updateLocationTracking(isTracking: Boolean) {
-        if (isTracking && TrackingUtility.hasLocationPermissions(this)) {
-            val request = LocationRequest().apply {
-                interval = LOCATION_UPDATE_INTERVAL
-                fastestInterval = FASTEST_LOCATION_INTERVAL
-                priority = PRIORITY_HIGH_ACCURACY
+        if(isTracking) {
+            if (TrackingUtility.hasLocationPermissions(this)) {
+                val request = LocationRequest().apply {
+                    interval = LOCATION_UPDATE_INTERVAL
+                    fastestInterval = FASTEST_LOCATION_INTERVAL
+                    priority = PRIORITY_HIGH_ACCURACY
+                }
+                fusedLocationProviderClient.requestLocationUpdates(
+                    request,
+                    locationCallback,
+                    Looper.getMainLooper()
+                )
             }
-            fusedLocationProviderClient.requestLocationUpdates(
-                request,
-                locationCallback,
-                Looper.getMainLooper()
-            )
         } else {
             fusedLocationProviderClient.removeLocationUpdates(locationCallback)
         }

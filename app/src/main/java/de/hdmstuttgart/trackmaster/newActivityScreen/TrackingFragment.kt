@@ -116,7 +116,7 @@ class TrackingFragment : Fragment() {
         activity?.let {
             val fragmentActivity = it
             lifecycleScope.launch(Dispatchers.Main) {
-                    fragmentActivity.finish()
+                fragmentActivity.finish()
             }
         }
     }
