@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.TrackMasterApplication
-import de.hdmstuttgart.trackmaster.data.Track
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

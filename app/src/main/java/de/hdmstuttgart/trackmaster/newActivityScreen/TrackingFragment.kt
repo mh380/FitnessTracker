@@ -1,47 +1,34 @@
 package de.hdmstuttgart.trackmaster.newActivityScreen
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.material.snackbar.Snackbar
 import de.hdmstuttgart.trackmaster.R
 import de.hdmstuttgart.trackmaster.TrackMasterApplication
 import de.hdmstuttgart.trackmaster.data.Track
 import de.hdmstuttgart.trackmaster.services.TrackingService
 import de.hdmstuttgart.trackmaster.utils.Constants
 import de.hdmstuttgart.trackmaster.utils.Constants.ACTION_STOP_SERVICE
-import de.hdmstuttgart.trackmaster.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import de.hdmstuttgart.trackmaster.utils.TrackingUtility
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-
 class TrackingFragment : Fragment() {
-
-    private val FINE_LOCATION_PERMISSION_CODE = 1
-
 
     private var isTracking = false
     private var pathPoints = mutableListOf<MutableList<LatLng>>()
@@ -60,10 +47,7 @@ class TrackingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         mapView = view.findViewById(R.id.mapView)
-
         mapView.onCreate(savedInstanceState)
 
         val btnToggleRun = view.findViewById<View>(R.id.btnToggleRun)
@@ -84,7 +68,6 @@ class TrackingFragment : Fragment() {
         subscribeToObservers()
     }
 
-    // new code
     private fun subscribeToObservers() {
         TrackingService.isTracking.observe(viewLifecycleOwner, Observer {
             updateTracking(it)
@@ -192,8 +175,6 @@ class TrackingFragment : Fragment() {
                 .addAll(polyline)
             map?.addPolyline(polylineOptions)
         }
-
-
     }
 
     private fun addLatestPolyline() {

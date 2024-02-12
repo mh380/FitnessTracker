@@ -1,16 +1,10 @@
 package de.hdmstuttgart.trackmaster.services
 
 import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.NotificationManager.IMPORTANCE_LOW
-import android.app.PendingIntent
 import android.content.Intent
 import android.location.Location
-import android.os.Build
 import android.os.Looper
 import android.util.Log
-import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -21,9 +15,6 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.maps.model.LatLng
-import de.hdmstuttgart.trackmaster.R
-import de.hdmstuttgart.trackmaster.newActivityScreen.NewActivity
-import de.hdmstuttgart.trackmaster.utils.Constants
 import de.hdmstuttgart.trackmaster.utils.Constants.ACTION_PAUSE_SERVICE
 import de.hdmstuttgart.trackmaster.utils.Constants.ACTION_START_OR_RESUME_SERVICE
 import de.hdmstuttgart.trackmaster.utils.Constants.ACTION_STOP_SERVICE
@@ -35,8 +26,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-//import javax.inject.Inject
-//import dagger.hilt.android.AndroidEntryPoint
 
 typealias Polyline = MutableList<LatLng>
 typealias Polylines = MutableList<Polyline>
@@ -98,7 +87,6 @@ class TrackingService : LifecycleService() {
                 ACTION_STOP_SERVICE -> {
                     Log.d("TrackingService", "Stopped service")
                 }
-
                 else -> {
                     Log.d("TrackingService", "Unknown action")
                 }
@@ -142,7 +130,6 @@ class TrackingService : LifecycleService() {
     }
 
     // Implementing the notification tracking state (damit updaten wir die Notification)
-
 
     @SuppressLint("MissingPermission")
     private fun updateLocationTracking(isTracking: Boolean) {
@@ -193,11 +180,9 @@ class TrackingService : LifecycleService() {
         pathPoints.postValue(this)
     } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
 
-
     private fun startForegroundService() {
         startTimer()
         isTracking.postValue(true)
         addEmptyPolyline()
     }
 }
-
