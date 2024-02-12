@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.hdmstuttgart.trackmaster.R
+import kotlin.math.round
 
 interface TrackClickListener {
     fun onTrackClickListener(position: Int)
@@ -21,9 +22,11 @@ class TrackAdapter(private val list: List<Track>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val trackModel = list[position]
+        val time = round(trackModel.timeInMillis / 60000f)
+
         holder.dateView.text = ("Date: " + toGermanDate(trackModel.date))
         holder.distanceView.text = ("Distance: " + trackModel.distanceInMeters / 1000 + " km")
-        holder.timeView.text = ("Time: " + trackModel.timeInMillis / 60000 + " minutes")
+        holder.timeView.text = ("Time: " + time + " minutes")
         holder.paceView.text = ("Average Pace: " + trackModel.avgSpeedInKMH + " km/h")
 
         holder.itemView.setOnClickListener {
