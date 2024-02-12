@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<!--
-    &lt;!&ndash; todo: styles define the look of a single view, themes for the entire app. implement the modes in themes!&ndash;&gt;
-
-    <style name="blueText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/medium_blue</item>
-    </style>
-
-
--->
-
-
-
-
-
-
 </resources>

@@ -70,7 +70,7 @@
 
     <!--end session button -->
     <style name="endButton" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="android:color">@color/medium_blue</item>
+        <item name="android:backgroundTint">@color/L_background_white</item>
         <item name="android:textColor">@color/medium_blue</item>
         <item name="android:colorControlActivated">@color/L_light_blue</item>
         <item name="android:strokeColor">@color/medium_blue</item>
