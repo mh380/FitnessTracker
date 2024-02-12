@@ -8,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface TrackDao {
 
-    @Query("SELECT * FROM running_table ORDER BY date")
+    @Query("SELECT * FROM running_table ORDER BY date DESC")
     fun getAllTracksOrderedByDate(): List<Track>
 
     @Query("SELECT * FROM running_table WHERE date BETWEEN :startDate AND :endDate ORDER BY date")

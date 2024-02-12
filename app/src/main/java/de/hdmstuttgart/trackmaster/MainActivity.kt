@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 trackMasterApplication.repository.insert(
                     Track(
-                        date = LocalDate.parse("2024-02-15"),
+                        date = LocalDate.parse("2024-01-15"),
                         distanceInMeters = 15000f,
                         timeInMillis = 1800000L
                     )
