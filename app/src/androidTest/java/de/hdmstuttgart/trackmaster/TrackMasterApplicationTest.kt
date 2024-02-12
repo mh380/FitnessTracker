@@ -44,7 +44,7 @@ class TrackMasterApplicationTest {
         android.Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-   /* @Test //todo: not working because button not visible from the beginning
+   @Test
     fun newActivityTest() {
         onView(withId(R.id.ic_home))
             .perform(click())
@@ -61,13 +61,15 @@ class TrackMasterApplicationTest {
             .perform(click())
 
         onView(withId(R.id.btnFinishRun))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            .check(ViewAssertions.matches(ViewMatchers.isClickable()))
             .perform(click())
 
         onView(withId(R.id.fl_wrapper))
             .check((ViewAssertions.matches(ViewMatchers.isDisplayed())))
 
         activityScenarioRule.scenario.close()
-    }*/
+    }
 
     @Test
     fun bottomNavbarTest() {
@@ -119,7 +121,6 @@ class TrackMasterApplicationTest {
             .assertExists()
             .isDisplayed()
 
-
         composeTestRule.onNodeWithTag("dropdown")
             .assertExists()
             .performClick()
@@ -138,7 +139,6 @@ class TrackMasterApplicationTest {
         composeTestRule.onNodeWithText("Year")
             .assertExists()
             .performClick()
-
 
         composeTestRule.onNodeWithTag("dropdown")
             .assertExists()
