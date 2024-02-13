@@ -11,9 +11,7 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 
@@ -24,13 +22,6 @@ import org.junit.Test
  */
 
 class TrackMasterApplicationTest {
-
-    @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("de.hdmstuttgart.trackmaster", appContext.packageName)
-    }
 
     @get: Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
