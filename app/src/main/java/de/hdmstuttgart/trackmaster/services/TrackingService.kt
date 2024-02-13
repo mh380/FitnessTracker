@@ -129,8 +129,6 @@ class TrackingService : LifecycleService() {
         isTimerEnabled = false
     }
 
-    // Implementing the notification tracking state (damit updaten wir die Notification)
-
     @SuppressLint("MissingPermission")
     private fun updateLocationTracking(isTracking: Boolean) {
         if(isTracking) {
