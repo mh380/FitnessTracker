@@ -24,7 +24,7 @@ object TrackingUtility {
     }
 
 
-    //Berechnet die Länge der Polyline
+    //Caluclate the length of the polyline
     fun calculatePolylineLength(polyline: Polyline): Float {
         var distance = 0f
         for (i in 0..polyline.size - 2) {
@@ -43,7 +43,7 @@ object TrackingUtility {
         return distance
     }
 
-    //Die Uhr, die die Zeit anzeigt
+    //clock that shows the time
     fun getFormattedStopWatchTime(ms: Long, includeMillis: Boolean = false): String {
         var milliseconds = ms
         val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
